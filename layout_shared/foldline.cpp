@@ -1,7 +1,8 @@
-#include "foldline.h"
 #include <QString>
 #include <QPixmap>
 #include <QSize>
+
+#include "layout_shared/foldline.h"
 #include "layout/qclicklabel.h"
 #include "layout/flowlayout.h"
 

@@ -1,12 +1,12 @@
-#include "sprojectexplorer.h"
 #include <QLabel>
-#import <QPushButton>
-#import "foldline.h"
-#import "layout/qclicklabel.h"
-#import "qsomething.h"
-#import <QFont>
-#import <QTimer>
-#import <QGridLayout>
+#include <QPushButton>
+#include <QFont>
+#include <QTimer>
+#include <QGridLayout>
+
+#include "sprojectexplorer.h"
+#include "layout_shared/foldline.h"
+#include "layout/qclicklabel.h"
 
 SProjectExplorer::SProjectExplorer(QWidget *parent) : QWidget(parent)
 {

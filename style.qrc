@@ -1,9 +1,9 @@
 <RCC>
     <qresource prefix="/">
-        <file>arrow-closed.png</file>
-        <file>arrow-opened.png</file>
-        <file>closed.png</file>
-        <file>opened.png</file>
-        <file>folder.png</file>
+        <file>images/arrow-closed.png</file>
+        <file>images/arrow-opened.png</file>
+        <file>images/closed.png</file>
+        <file>images/folder.png</file>
+        <file>images/opened.png</file>
     </qresource>
 </RCC>

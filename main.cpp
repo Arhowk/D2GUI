@@ -1,8 +1,8 @@
-#include "sbetalayout.h"
+#include "smainlayout.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QPushButton>
-#include "foldline.h"
+#include "layout_shared/foldline.h"
 #include <QImage>
 
 int main(int argc, char *argv[])
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     QWidget widget;
     window.setCentralWidget(&widget);
 
-    SBetaLayout layout( &widget, &window );
+    SMainLayout layout( &widget, &window );
 
     window.show();
 

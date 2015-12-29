@@ -1,8 +1,5 @@
-#include "sbetalayout.h"
-#include "sprojectexplorer.h"
 #include <QPushButton>
 #include <QTimer>
-#include "foldline.h"
 #include <QMenu>
 #include <QAction>
 #include <QMenuBar>
@@ -10,11 +7,16 @@
 #include <QMainWindow>
 #include <QPalette>
 #include <QGroupBox>
-SBetaLayout::y(){
+
+#include "smainlayout.h"
+#include "layout_shared/foldline.h"
+#include "project_explorer/sprojectexplorer.h"
+
+SMainLayout::y(){
     //qDebug("Size: %d", projectExplorer->height());
 }
 
-SBetaLayout::setupMenu(QMainWindow * wndr)
+SMainLayout::setupMenu(QMainWindow * wndr)
 {
     //QMenuBar * menu = this->parent()->parent()->menu
    QMenu *menu = wndr->menuBar()->addMenu(tr("&File"));
@@ -27,7 +29,7 @@ SBetaLayout::setupMenu(QMainWindow * wndr)
 
 }
 
-SBetaLayout::SBetaLayout(QWidget *parent, QMainWindow * parentWindow) : QGridLayout(parent)
+SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QGridLayout(parent)
 {
     parent->setWindowTitle(tr("hello world"));
     projectExplorer = new SProjectExplorer();
@@ -49,10 +51,6 @@ SBetaLayout::SBetaLayout(QWidget *parent, QMainWindow * parentWindow) : QGridLay
     qDebug("%d", projectExplorer->height());
     setRowMinimumHeight(0, 20); // 20px for top row
 
-    auto y = [] ()
-    {
-        return 0;
-    };
 
     QTimer * timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(y()));

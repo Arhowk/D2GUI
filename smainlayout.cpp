@@ -9,10 +9,13 @@
 #include <QGroupBox>
 #include <QSplitter>
 #include <QTextEdit>
+#include <QList>
 
 #include "smainlayout.h"
 #include "layout_shared/foldline.h"
 #include "project_explorer/sprojectexplorer.h"
+#include "trigger_editor/striggereditor.h"
+#include "notes/snotesarea.h"
 
 SMainLayout::y(){
     //qDebug("Size: %d", projectExplorer->height());
@@ -31,36 +34,45 @@ SMainLayout::setupMenu(QMainWindow * wndr)
 
 }
 
-SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QGridLayout(parent)
+
+SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QSplitter(Qt::Horizontal, parent)
 {
-    QWidget wnd;
-    QTextEdit *editor1 = new QTextEdit;
-    QTextEdit *editor2 = new QTextEdit;
-    QTextEdit *editor3 = new QTextEdit;
+    //this->setupMenu(parentWindow);
+    this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    QVBoxLayout * qvbxl = new QVBoxLayout;
+    QGroupBox * qgp = new QGroupBox("");
+    qgp->setStyleSheet("background-color: white;");
+    qgp->setLayout(qvbxl);
+    qvbxl->addWidget(new SProjectExplorer());
 
-    QSplitter *split1 = new QSplitter;
-    QSplitter *split2 = new QSplitter;
+    addWidget(qgp);
 
-    QVBoxLayout *layout = new QVBoxLayout;
 
-    QWidget *container = new QWidget;
-    QVBoxLayout *container_layout = new QVBoxLayout;
+    QSplitter * commentsAndTriggers = new QSplitter(Qt::Vertical);
 
-    split1->addWidget(editor1);
-    split1->addWidget(editor2);
 
-    container_layout->addWidget(split1);
-    container->setLayout(container_layout);
+    qvbxl = new QVBoxLayout;
+    qgp = new QGroupBox("");
+    qvbxl->setMargin(0);
+    qgp->setStyleSheet("background-color: white;");
+    qgp->setLayout(qvbxl);
+    qvbxl->addWidget(new QTextEdit());
+    commentsAndTriggers->addWidget(qgp);
 
-    split2->setOrientation(Qt::Vertical);
-    split2->addWidget(container);
-    split2->addWidget(editor3);
+    qvbxl = new QVBoxLayout;
+    qgp = new QGroupBox("");
+    qvbxl->setMargin(0);
+    qgp->setStyleSheet("background-color: white;");
+    qgp->setLayout(qvbxl);
+    qvbxl->addWidget(new QTextEdit());
+    commentsAndTriggers->addWidget(qgp);
 
-    layout->addWidget(split2);
+    addWidget(commentsAndTriggers);
 
-    wnd.setLayout(layout);
-    addWidget(&wnd,0,0);
 
+    QList<int> list;
+    list << 300 << (1920-300);
+    this->setSizes(list);
     /*
      * Old grid one
      */
@@ -100,6 +112,5 @@ SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QGridLay
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(y()));
     timer->start(1000); //time specified in ms
     timer->setSingleShot(false);*/
-    this->setupMenu(parentWindow);
 }
 

@@ -2,11 +2,12 @@
 #define SMAINLAYOUT_H
 
 #include <QGridLayout>
+#include <QSplitter>
 #include <QMainWindow>
 
 #include "project_explorer/sprojectexplorer.h"
 
-class SMainLayout : public QGridLayout
+class SMainLayout : public QSplitter
 {
     Q_OBJECT
 public:

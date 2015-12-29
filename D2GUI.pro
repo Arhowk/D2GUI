@@ -20,6 +20,7 @@ SOURCES += main.cpp\
     layout/scrollarea.cpp \
     layout_shared/foldline.cpp \
     project_explorer/sprojectexplorer.cpp \
+    trigger_editor/striggereditor.cpp
 
 HEADERS  += \
     smainlayout.h \
@@ -29,6 +30,7 @@ HEADERS  += \
     layout/scrollarea.h \
     layout_shared/foldline.h \
     project_explorer/sprojectexplorer.h \
+    trigger_editor/striggereditor.h
 
 FORMS    += mainwindow.ui
 

@@ -62,9 +62,9 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 
     //Usage
     //Top
-    collapseOpen->setPixmap(QPixmap(":/closed.png"));
-    collapseClose->setPixmap(QPixmap(":/opened.png"));
-    imageIcon->setPixmap(QPixmap(":/folder.png"));
+    collapseOpen->setPixmap(QPixmap(":/images/closed.png"));
+    collapseClose->setPixmap(QPixmap(":/images/opened.png"));
+    imageIcon->setPixmap(QPixmap(":/images/folder.png"));
 
 
     connect(collapseOpen, SIGNAL(clicked()), this, SLOT(OnCollapseClicked()));

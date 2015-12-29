@@ -27,8 +27,8 @@ public:
     SetChild(FoldLine * child);
     RemoveChild(FoldLine * child);
     AddChild(FoldLine * child);
-    SetImage(QString * dir);
-    SetText(QString * str);
+    SetImage(QString dir);
+    SetText(QString str);
 
     static QImage * collapseOpenImage;
     static QImage * collapseCloseImage;

@@ -64,7 +64,7 @@ SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QSplitte
     qvbxl->setMargin(0);
     qgp->setStyleSheet("background-color: white;");
     qgp->setLayout(qvbxl);
-    qvbxl->addWidget(new QTextEdit());
+    qvbxl->addWidget(new STriggerEditor());
     commentsAndTriggers->addWidget(qgp);
 
     addWidget(commentsAndTriggers);
@@ -73,6 +73,10 @@ SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QSplitte
     QList<int> list;
     list << 300 << (1920-300);
     this->setSizes(list);
+
+    list = QList<int>();
+    list << 300 << (1920-300);
+    commentsAndTriggers->setSizes(list);
     /*
      * Old grid one
      */

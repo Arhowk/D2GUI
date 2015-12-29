@@ -12,6 +12,7 @@ QImage * FoldLine::collapseOpenImage = new QImage();
 
 FoldLine::OnCollapseClicked()
 {
+    this->setFocus();
     childrenVisible = 1-childrenVisible;
 
     if(childrenVisible == 1){
@@ -91,14 +92,15 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     //Rest
 
     gridLayout->addWidget(upperLine,0,0,1,2);
-    gridLayout->addWidget(childrenBox,1,1,1,2);
+    gridLayout->addWidget(childrenBox,1,1,1,500); //TODO: Find a better solution than to make the children box span 500 columns...
     gridLayout->setColumnMinimumWidth(0, 19);
+    gridLayout->setColumnMinimumWidth(3, 200);
 
     //Debug
     //childrenBoxLayout->addWidget(label);
     label->setText("Hello World!");
     textLabel->setText("LOL WTF");
-    upperGridLayout->setMargin(0);
+    upperGridLayout->setMargin(1);
     upperGridLayout->setSpacing(3);
     gridLayout->setMargin(0);
     gridLayout->setSpacing(0);
@@ -121,14 +123,14 @@ FoldLine::RemoveChild(FoldLine * child)
 
 }
 
-FoldLine::SetImage(QString * dir)
+FoldLine::SetImage(QString dir)
 {
-
+    imageIcon->setPixmap(QPixmap(QString(":/images/") + (dir) + QString(".png")));
 }
 
-FoldLine::SetText(QString * qstr)
+FoldLine::SetText(QString qstr)
 {
-    textLabel->setText(*qstr);
+    textLabel->setText(qstr);
 }
 
 

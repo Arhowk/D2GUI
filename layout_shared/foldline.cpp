@@ -104,12 +104,6 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     gridLayout->setSpacing(0);
     childrenBoxLayout->setMargin(0);
     childrenBoxLayout->setSpacing(0);
-    qDebug("height : %d", upperLine->sizeHint().height());
-    qDebug("wtf : %d", textLabel->sizeHint().height());
-    qDebug("wtf2 : %d", collapseOpen->sizeHint().height());
-    qDebug("wtf2 : %d", collapseClose->sizeHint().height());
-    qDebug("wtf3 : %d", upperGridLayout->sizeHint().height());
-    qDebug("Align Left %d", Qt::AlignLeft);
     upperGridLayout->setAlignment(textLabel, Qt::AlignLeft);
     //gridLayout->setRowMaximumHeight(0, 20); // 20px for top row
 

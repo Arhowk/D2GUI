@@ -48,7 +48,6 @@ SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QGridLay
     projectExplorer->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
     setRowStretch(0, 9); // 10% for top row
     setRowStretch(1, 1); // 80% for middle row
-    qDebug("%d", projectExplorer->height());
     setRowMinimumHeight(0, 20); // 20px for top row
 
 

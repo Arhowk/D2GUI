@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>arrow-closed.png</file>
+        <file>arrow-opened.png</file>
+        <file>closed.png</file>
+        <file>opened.png</file>
+        <file>folder.png</file>
+    </qresource>
+</RCC>

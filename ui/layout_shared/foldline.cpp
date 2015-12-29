@@ -92,14 +92,14 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 
     gridLayout->addWidget(upperLine,0,0,1,2);
     gridLayout->addWidget(childrenBox,1,1,1,2);
-    gridLayout->setColumnMinimumWidth(0, 15);
+    gridLayout->setColumnMinimumWidth(0, 19);
 
     //Debug
     //childrenBoxLayout->addWidget(label);
     label->setText("Hello World!");
     textLabel->setText("LOL WTF");
     upperGridLayout->setMargin(0);
-    upperGridLayout->setSpacing(0);
+    upperGridLayout->setSpacing(3);
     gridLayout->setMargin(0);
     gridLayout->setSpacing(0);
     childrenBoxLayout->setMargin(0);

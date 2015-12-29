@@ -1,4 +1,4 @@
-#include "layout/qclicklabel.h"
+#include "ui/layout/qclicklabel.h"
 
 QClickLabel::QClickLabel(const QString& text, QWidget* parent)
     : QLabel(parent)

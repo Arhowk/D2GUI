@@ -5,7 +5,7 @@
 #include <QSplitter>
 #include <QMainWindow>
 
-#include "project_explorer/sprojectexplorer.h"
+#include "ui/project_explorer/sprojectexplorer.h"
 
 class SMainLayout : public QSplitter
 {

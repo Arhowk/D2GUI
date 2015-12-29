@@ -5,8 +5,8 @@
 #include <QFrame>
 #include <QLabel>
 #include <QImage>
-#include "layout/qclicklabel.h"
-#include "layout/flowlayout.h"
+#include "ui/layout/qclicklabel.h"
+#include "ui/layout/flowlayout.h"
 
 class FoldLine : public QFrame
 {

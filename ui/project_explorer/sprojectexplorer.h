@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QLabel>
-#include "layout/flowlayout.h"
+#include "ui/layout/flowlayout.h"
 class SProjectExplorer : public QWidget
 {
     Q_OBJECT

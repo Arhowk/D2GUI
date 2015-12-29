@@ -2,9 +2,9 @@
 #include <QPixmap>
 #include <QSize>
 
-#include "layout_shared/foldline.h"
-#include "layout/qclicklabel.h"
-#include "layout/flowlayout.h"
+#include "ui/layout_shared/foldline.h"
+#include "ui/layout/qclicklabel.h"
+#include "ui/layout/flowlayout.h"
 
 int FoldLine::hasImagesInit = 0;
 QImage * FoldLine::collapseCloseImage = new QImage();

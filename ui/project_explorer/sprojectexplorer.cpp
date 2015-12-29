@@ -4,9 +4,9 @@
 #include <QTimer>
 #include <QGridLayout>
 
-#include "sprojectexplorer.h"
-#include "layout_shared/foldline.h"
-#include "layout/qclicklabel.h"
+#include "ui/project_explorer/sprojectexplorer.h"
+#include "ui/layout_shared/foldline.h"
+#include "ui/layout/qclicklabel.h"
 
 SProjectExplorer::SProjectExplorer(QWidget *parent) : QWidget(parent)
 {

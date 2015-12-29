@@ -1,11 +1,11 @@
-#include "smainlayout.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QGridLayout>
-#include "layout_shared/foldline.h"
 #include <QImage>
 
+#include "smainlayout.h"
+#include "ui/layout_shared/foldline.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

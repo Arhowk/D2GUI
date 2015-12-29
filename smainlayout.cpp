@@ -12,10 +12,10 @@
 #include <QList>
 
 #include "smainlayout.h"
-#include "layout_shared/foldline.h"
-#include "project_explorer/sprojectexplorer.h"
-#include "trigger_editor/striggereditor.h"
-#include "notes/snotesarea.h"
+#include "ui/layout_shared/foldline.h"
+#include "ui/project_explorer/sprojectexplorer.h"
+#include "ui/trigger_editor/striggereditor.h"
+#include "ui/notes/snotesarea.h"
 
 SMainLayout::y(){
     //qDebug("Size: %d", projectExplorer->height());

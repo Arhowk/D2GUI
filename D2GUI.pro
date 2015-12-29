@@ -14,25 +14,23 @@ CONFIG += c++11
 
 SOURCES += main.cpp\
     smainlayout.cpp \
-    layout/flowlayout.cpp \
-    layout/qclicklabel.cpp \
-    layout/qsizewidget.cpp \
-    layout/scrollarea.cpp \
-    layout_shared/foldline.cpp \
-    project_explorer/sprojectexplorer.cpp \
-    trigger_editor/striggereditor.cpp \
-    notes/snotesarea.cpp
+    ui/layout/flowlayout.cpp \
+    ui/layout/qclicklabel.cpp \
+    ui/layout/scrollarea.cpp \
+    ui/layout_shared/foldline.cpp \
+    ui/notes/snotesarea.cpp \
+    ui/project_explorer/sprojectexplorer.cpp \
+    ui/trigger_editor/striggereditor.cpp
 
 HEADERS  += \
     smainlayout.h \
-    layout/flowlayout.h \
-    layout/qclicklabel.h \
-    layout/qsizewidget.h \
-    layout/scrollarea.h \
-    layout_shared/foldline.h \
-    project_explorer/sprojectexplorer.h \
-    trigger_editor/striggereditor.h \
-    notes/snotesarea.h
+    ui/layout/flowlayout.h \
+    ui/layout/qclicklabel.h \
+    ui/layout/scrollarea.h \
+    ui/layout_shared/foldline.h \
+    ui/notes/snotesarea.h \
+    ui/project_explorer/sprojectexplorer.h \
+    ui/trigger_editor/striggereditor.h
 
 FORMS    += mainwindow.ui
 

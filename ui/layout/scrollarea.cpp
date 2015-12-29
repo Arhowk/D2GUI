@@ -1,4 +1,4 @@
-#include "layout/scrollarea.h"
+#include "ui/layout/scrollarea.h"
 
 ScrollArea::ScrollArea(QWidget *parent) : QWidget(parent)
 {

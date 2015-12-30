@@ -23,7 +23,7 @@ public:
     QLabel * textLabel;
 
 
-    int childrenVisible = 0;
+    int childrenVisible = 1;
     SetChild(FoldLine * child);
     RemoveChild(FoldLine * child);
     AddChild(FoldLine * child);

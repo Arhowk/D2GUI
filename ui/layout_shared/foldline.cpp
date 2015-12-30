@@ -75,7 +75,6 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 
     //Bottom
     childrenBox->setLayout(childrenBoxLayout);
-    childrenBox->setVisible(false);
 
     //Connections
     //Top
@@ -84,17 +83,19 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     upperGridLayout->addWidget(collapseClose,0,0);
     upperGridLayout->addWidget(imageIcon,0,1);
 
-    collapseClose->hide();
-    collapseOpen->show();
+    collapseClose->show();
+    collapseOpen->hide();
 
     //Bottom
 
     //Rest
 
     gridLayout->addWidget(upperLine,0,0,1,2);
-    gridLayout->addWidget(childrenBox,1,1,1,500); //TODO: Find a better solution than to make the children box span 500 columns...
+    gridLayout->addWidget(childrenBox,1,1,1,9999); //TODO: Find a better solution than to make the children box span 500 columns...
     gridLayout->setColumnMinimumWidth(0, 19);
-    gridLayout->setColumnMinimumWidth(3, 200);
+    gridLayout->setColumnMinimumWidth(3, 100);
+
+    childrenBox->setVisible(true);
 
     //Debug
     //childrenBoxLayout->addWidget(label);

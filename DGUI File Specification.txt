@@ -1,0 +1,25 @@
+First 4 bytes are version ID
+
+--version 0000
+first 64 bytes are throwaway
+first 4 bytes are flag id's that ill set later
+next 4 bytes are offset of events (the position in memory in which "events" ends)
+next 4 bytes are offset of conditons (the position in memory in which "conditions" ends)
+next 4 bytes are ofset of actions (the position in memory in which "actions" ends, in bytes)
+next (offset) bytes are events
+next (offset) bytes are conditions
+next (offset) bytes are actions
+last 10 bytes are a signature - D2GUI
+
+key structure-
+first 4 bytes are key id
+next 2 bytes are # of args
+next # bytes are byte size of args
+next byte is # of blocks
+next # bytes is byte size of blocks (if applicable)
+next (#) bytes are args
+
+arg structure-
+first byte is arg type
+next byte is arg size
+next (arg size) bytes are arg data

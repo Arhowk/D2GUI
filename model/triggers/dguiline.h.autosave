@@ -1,0 +1,14 @@
+#ifndef DGUILINE_H
+#define DGUILINE_H
+
+
+class DGUILine
+{
+public:
+    DGUILine();
+    bool isPrototype;
+    
+
+};
+
+#endif // DGUILINE_H

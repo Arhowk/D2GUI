@@ -1,27 +1,28 @@
-var t = {
-    Events:
+{
+    "Events":
     {
-        KEY: 0,
+        "temp": "hi",
+        "KEY": 0,
 
-        DOTA:
+        "DOTA":
         {
-            KEY: 0,
+            "KEY": 0,
 
-            dat: [
+            "dat": [
                 {
-                    text: "A {DOTA_TowerPos} owned by {DOTA_Team} was {Entity_KillMethod}"
+                    "text": "A {DOTA_TowerPos} owned by {DOTA_Team} was {Entity_KillMethod}"
                 }
             ]
         }
     },
 
-    Conditions:
+    "Conditions":
     {
-        KEY: 1
+        "KEY": 1
     },
 
-    Actions:
+    "Actions":
     {
-        KEY: 2
+        "KEY": 2
     }
 }

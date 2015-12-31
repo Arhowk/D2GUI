@@ -5,6 +5,7 @@
 #include <QImage>
 
 #include "smainlayout.h"
+#include "model/triggers/dguikeydatabase.h"
 #include "ui/layout_shared/foldline.h"
 int main(int argc, char *argv[])
 {
@@ -14,7 +15,7 @@ int main(int argc, char *argv[])
 
    // SBetaLayout h;
    // h.show();=
-
+    DGUIKeyDatabase::init();
     QMainWindow window;
     QWidget widget;
     window.setCentralWidget(&widget);

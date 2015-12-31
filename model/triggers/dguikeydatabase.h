@@ -9,12 +9,13 @@ class DGUIKeyDatabase
 {
 public:
     DGUIKeyDatabase();
-    static DGUILine GetKeyWithIndex(unsigned char);
-    static DGUILine GetArgumentWithIndex(unsigned char);
+    static DGUILine getKeyWithIndex(unsigned char);
+    static DGUIArgument getArgumentWithIndex(unsigned char);
+    static QString* getArgumentNameWithIndex(unsigned char, QString*);
     static init();
 
-    static QJsonObject &triggerDatabase;
-    static QJsonObject &argumentDatabase;
+    static QJsonObject triggerDatabase;
+    static QJsonObject argumentDatabase;
 };
 
 #endif // DGUIKEYDATABASE_H

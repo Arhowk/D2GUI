@@ -1,0 +1,26 @@
+{
+    "VersionInfo": 0,
+    "Note": "Hello World",
+
+    "Events":
+    [
+        {
+            "PrototypeId": "0",
+            "Arguments":
+            [
+                "-1",
+                "-1",
+                "1"
+            ]
+        }
+
+    ],
+
+    "Conditions":
+    [
+    ],
+
+    "Actions":
+    [
+    ]
+}

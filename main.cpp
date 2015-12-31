@@ -5,8 +5,10 @@
 #include <QImage>
 
 #include "smainlayout.h"
-#include "model/triggers/dguikeydatabase.h"
 #include "ui/layout_shared/foldline.h"
+
+#include "model/triggers/dguifile.h"
+#include "model/triggers/dguikeydatabase.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -16,6 +18,9 @@ int main(int argc, char *argv[])
    // SBetaLayout h;
    // h.show();=
     DGUIKeyDatabase::init();
+    DGUIFile::CreateBetaFile();
+    qDebug("%d", DGUIKeyDatabase::argumentDatabase.length());
+    qDebug("%d", DGUIKeyDatabase::triggerDatabase.length());
     QMainWindow window;
     QWidget widget;
     window.setCentralWidget(&widget);

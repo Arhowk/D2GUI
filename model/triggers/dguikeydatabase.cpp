@@ -8,22 +8,35 @@
 //key = trigger
 //argument = argument
 
-DGUILine DGUIKeyDatabase::GetKeyWithIndex(unsigned char index)
+QJsonObject DGUIKeyDatabase::argumentDatabase = QJsonObject();
+QJsonObject DGUIKeyDatabase::triggerDatabase = QJsonObject();
+
+DGUILine DGUIKeyDatabase::getKeyWithIndex(unsigned char index)
+{
+
+}
+DGUIArgument DGUIKeyDatabase::getArgumentWithIndex(unsigned char index)
 {
 
 }
 
+QString* DGUIKeyDatabase::getArgumentNameWithIndex(unsigned char index, QString * data)
+{
+
+}
+
+
 DGUIKeyDatabase::init()
 {
 
-    QFile triggerDatabase(QStringLiteral("D:/Code/Qt/D2GUI/resources/triggerdatabase.js")); //im sorry i know this is an absolute dir
+    QFile triggerFile(QStringLiteral("D:/Code/Qt/D2GUI/resources/triggerdatabase.js")); //im sorry i know this is an absolute dir
 
-    if (!triggerDatabase.open(QIODevice::ReadOnly)) {
+    if (!triggerFile.open(QIODevice::ReadOnly)) {
         qWarning("Couldn't open save file.");
         return false;
     }
 
-    QByteArray saveData = triggerDatabase.readAll();
+    QByteArray saveData = triggerFile.readAll();
     qDebug("byte array: %d", saveData.size());
 
     QJsonDocument triggerDoc(QJsonDocument::fromJson(saveData));
@@ -34,7 +47,31 @@ DGUIKeyDatabase::init()
 
     qDebug(json["Events"].toObject()["temp"].toString().toUtf8().constData());
 
-    triggerDatabase.close();
+    triggerFile.close();
+
+
+
+    QFile argumentFile(QStringLiteral("D:/Code/Qt/D2GUI/resources/argumentdatabase.js")); //im sorry i know this is an absolute dir
+
+    if (!argumentFile.open(QIODevice::ReadOnly)) {
+        qWarning("Couldn't open save file.");
+        return false;
+    }
+
+    QByteArray argData = argumentFile.readAll();
+    qDebug("byte array: %d", argData.size());
+
+    QJsonDocument argDoc(QJsonDocument::fromJson(argData));
+
+    const QJsonObject &argJson = argDoc.object();
+
+    qDebug("finished: %d", argJson.length());
+    argumentFile.close();
+
+
+    argumentDatabase = argJson;
+    triggerDatabase = json;
+
     /*
 
     QFile saveFile(QStringLiteral("D:/Code/Qt/D2GUI/resources/triggerdatabase.js"));

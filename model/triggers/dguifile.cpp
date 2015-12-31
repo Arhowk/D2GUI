@@ -16,8 +16,8 @@ DGUIFile DGUIFile::CreateBetaFile()
     DGUILine * action2;
     DGUILine * action3;
 
-    DGUILine protoEvt1 = DGUIKeyDatabase::getKeyWithIndex(0);
-    event1 = protoEvt1.branch();
+    DGUILine* protoEvt1 = DGUIKeyDatabase::getKeyWithIndex(0,0);
+    event1 = protoEvt1->branch();
     event1->setArgument(0, new DGUIArgument(0, new QString("-1")));
     event1->setArgument(1, new DGUIArgument(0, new QString("-1")));
     event1->setArgument(2, new DGUIArgument(0, new QString("1")));

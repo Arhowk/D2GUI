@@ -16,6 +16,7 @@ DGUILine* DGUILine::branch()
     if(!isPrototype){
         qWarning("Attempted to branch off of a DGUILine that isnt a prototype");
     }else{
+        qDebug("Branching off of a good dguiline");
         DGUILine *newLine = new DGUILine(this->prototypeKey, false, new QList<DGUIArgument*>(), prototypeList);
         return newLine;
     }
@@ -23,15 +24,13 @@ DGUILine* DGUILine::branch()
 
 DGUILine::setArgument(unsigned char index, DGUIArgument *arg)
 {
-    if(argList->at(index)){
-        DGUIArgument *argb = argList->at(index);
+    if(prototypeList->size() > index){
+        DGUIArgument *argb = prototypeList->at(index);
         if(arg->typeMatch(argb)){
 
         }else{
             qWarning("Attempted to set an argument for a DGUILine with the wrong arg type");
         }
-    }else if(argList->size() < index){
-
     }else{
         qWarning("Attempted to set an argument for a DGUILine beyond its argument count");
     }

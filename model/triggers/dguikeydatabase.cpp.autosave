@@ -17,12 +17,30 @@ DGUILine* DGUIKeyDatabase::getKeyWithIndex(unsigned char type, unsigned char ind
 
 
     QList<DGUIArgument*>* protoList = new QList<DGUIArgument*>();
-
-    //regex finder- "\\{([a-zA-Z]+)\\}"
-
-
-    DGUILine * line = new DGUILine(index, true, new QList<DGUIArgument*>(), new QList<DGUIArgument*>());
-    return line;
+    
+    //search for all of the arg instances
+    QString pattern = "\\{([a-zA-Z_]+)\\}";\
+    QRegExp rx(pattern);
+    
+    Qt::CaseSensitivity cs = Qt::CaseInsensitive;
+    rx.setCaseSensitivity(cs);
+    
+    if(!rx.isValid()){
+        qWarning("Invalid regex");
+    }else{
+        indexEdit->setText(QString::number(rx.indexIn(text)));
+        matchedLengthEdit->setText(QString::number(rx.matchedLength()));
+        for (int i = 0; i < MaxCaptures; ++i) {
+            captureLabels[i]->setEnabled(i <= rx.captureCount());
+            captureEdits[i]->setEnabled(i <= rx.captureCount());
+            captureEdits[i]->setText(rx.cap(i));
+        }
+    
+        setUpdatesEnabled(true);
+    
+        DGUILine * line = new DGUILine(index, true, new QList<DGUIArgument*>(), new QList<DGUIArgument*>());
+        return line;
+    }
 }
 DGUIArgument* DGUIKeyDatabase::getArgumentWithIndex(unsigned char index)
 {

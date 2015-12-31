@@ -9,8 +9,8 @@ class DGUIKeyDatabase
 {
 public:
     DGUIKeyDatabase();
-    static DGUILine getKeyWithIndex(unsigned char);
-    static DGUIArgument getArgumentWithIndex(unsigned char);
+    static DGUILine* getKeyWithIndex(unsigned char, unsigned char);
+    static DGUIArgument* getArgumentWithIndex(unsigned char);
     static QString* getArgumentNameWithIndex(unsigned char, QString*);
     static init();
 

@@ -6,6 +6,7 @@ class DGUIArgument
 {
 public:
     DGUIArgument(unsigned char, void*);
+    bool isPrototype;
 
 };
 

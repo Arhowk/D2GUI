@@ -1,0 +1,16 @@
+{
+    "VersionInfo": 0,
+    "Note": "Hello World",
+    
+    "Events":
+    [
+    ],
+    
+    "Conditions":
+    [
+    ],
+    
+    "Actions":
+    [
+    ]
+}

@@ -7,6 +7,7 @@ class DGUIFile
 public:
     DGUIFile();
     static DGUIFile CreateBetaFile();
+    bool isPrototype;
 
 };
 

@@ -34,8 +34,19 @@ DGUIProject::DGUIProject(QString *dir, QString *name)
 QJsonObject DGUIProject::getStructureAsJson()
 {
     QJsonObject obj;
+    qDebug("get structure as json");
+
+    QJsonObject objen = QJsonObject();
+    QJsonArray arr = QJsonArray();
+    arr.append(QString("wtf"));
+    objen["hi"] = arr;
+    arr = objen["hi"].toArray();
+    arr.removeFirst();
+    arr.append(QString("GOOD!"));
+    qDebug() << arr.first().toString();
 
     foreach(DGUIFile *f, files){
+
         QString dirNew = f->dir.right(f->dir.size() - this->dir.size() - 1);
         QJsonObject *proc = &obj;
         int i = dirNew.indexOf("/");
@@ -46,21 +57,36 @@ QJsonObject DGUIProject::getStructureAsJson()
             i = dirNew.indexOf("/");
             objectToBeAdded =new QJsonObject();
             if(i == -1){
-                QJsonArray *arr = new QJsonArray();
-                arr->append(dirNew);
-                objectToBeAdded->insert("dirContainer", *arr);
-            }
-            if(!proc->contains(subDir)){
-                objectToBeAdded->insert(QString("hello"), QString("world"));
-                proc->insert(subDir, *objectToBeAdded);
+                if(proc->contains(subDir)){
+                    qDebug("Size Before: %d ",proc->operator [](subDir).toObject()["dirContainer"].toArray().size());
+                    QJsonArray *arr;
+                    *arr = proc->operator [](subDir).toObject()["dirContainer"].toArray();
+                    arr->append(dirNew);
+                    qDebug("Size of JS Array %d", arr->size());
+                    qDebug("Address: %d", arr);
+                    qDebug("Size After %d ", proc->operator [](subDir).toObject()["dirContainer"].toArray().size());
+
+                }else{
+                    qDebug("Make new");
+                    QJsonArray *arr = new QJsonArray();
+                    arr->append(dirNew);
+                    objectToBeAdded->insert("dirContainer", *arr);
+                    proc->insert(subDir, *objectToBeAdded);
+                }
             }else{
-                *objectToBeAdded = proc->operator [](subDir).toObject();
+                if(!proc->contains(subDir)){
+                    proc->insert(subDir, *objectToBeAdded);
+                }else{
+                    *objectToBeAdded = proc->operator [](subDir).toObject();
+                }
             }
             proc = objectToBeAdded;
-
-            i = dirNew.indexOf("/");
         }
 
     }
+    QJsonDocument doc(obj);
+    QByteArray bytes = doc.toJson();
+
+    qDebug() << bytes;
     return obj;
 }

@@ -31,6 +31,11 @@ DGUIProject::DGUIProject(QString *dir, QString *name)
     this->getStructureAsJson();
 }
 
+
+
+/*
+ * rip- json objects are read only
+ * LOL
 QJsonObject DGUIProject::getStructureAsJson()
 {
     //This just in- you cant modify nested JSON objects in QT. Stupid shit.
@@ -101,4 +106,4 @@ QJsonObject DGUIProject::getStructureAsJson()
     qDebug() << bytes;
     qDebug("Returning out of the print!");
     return obj;
-}
+}*/

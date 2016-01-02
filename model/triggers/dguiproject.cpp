@@ -33,17 +33,21 @@ DGUIProject::DGUIProject(QString *dir, QString *name)
 
 QJsonObject DGUIProject::getStructureAsJson()
 {
+    //This just in- you cant modify nested JSON objects in QT. Stupid shit.
+
     QJsonObject obj;
     qDebug("get structure as json");
 
     QJsonObject objen = QJsonObject();
+    QJsonObject innerObjen = QJsonObject();
     QJsonArray arr = QJsonArray();
     arr.append(QString("wtf"));
-    objen["hi"] = arr;
-    arr = objen["hi"].toArray();
+    innerObjen["hi"] = arr;
+    objen["hi2"] = innerObjen;
+    arr = objen["hi2"].toObject()["hi"].toArray();
     arr.removeFirst();
     arr.append(QString("GOOD!"));
-    qDebug() << arr.first().toString();
+    qDebug() << objen["hi2"].toObject()["hi"].toArray().first().toString();
 
     foreach(DGUIFile *f, files){
 
@@ -58,13 +62,20 @@ QJsonObject DGUIProject::getStructureAsJson()
             objectToBeAdded =new QJsonObject();
             if(i == -1){
                 if(proc->contains(subDir)){
-                    qDebug("Size Before: %d ",proc->operator [](subDir).toObject()["dirContainer"].toArray().size());
+                    //This is where that "read only" crap with nested objects comes in
+                    //I can't modify something so far down the stream
+                    //So I'm just gonna completely rebuild the object every time
+                    //Elegant? no
+                    //who cares.
+
                     QJsonArray *arr;
+                    QJsonObject sub = proc->operator [](subDir).toObject();
+
                     *arr = proc->operator [](subDir).toObject()["dirContainer"].toArray();
                     arr->append(dirNew);
-                    qDebug("Size of JS Array %d", arr->size());
-                    qDebug("Address: %d", arr);
-                    qDebug("Size After %d ", proc->operator [](subDir).toObject()["dirContainer"].toArray().size());
+
+                    sub["dirContainer"] = *arr;
+                    proc->insert(subDir,sub);
 
                 }else{
                     qDebug("Make new");
@@ -88,5 +99,6 @@ QJsonObject DGUIProject::getStructureAsJson()
     QByteArray bytes = doc.toJson();
 
     qDebug() << bytes;
+    qDebug("Returning out of the print!");
     return obj;
 }

@@ -63,6 +63,7 @@ SProjectExplorer::loadSubFolder(QString path, FoldLine *line, QJsonObject* obj){
 
 SProjectExplorer::loadFolder(DGUIProject * dir){
     QJsonObject obj = dir->getStructureAsJson();
+    qDebug("ALRIGHT WE DONE GETTING THE JSON OF THE FOLDER");
     QString workingPath = dir->dir;
     qDebug("ALRIGHT WE LOADING THE FOLDER");
     foreach(QString key, obj.keys()){

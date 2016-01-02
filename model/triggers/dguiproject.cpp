@@ -3,8 +3,11 @@
 #include <QtGui>
 #include <QString>
 #include <QJsonObject>
+#include <QMap>
 #include <QDirIterator>
 #include <QDir>
+
+#include "dguistructurevalue.h"
 
 DGUIProject::DGUIProject(QString *dir, QString *name)
 {
@@ -31,7 +34,50 @@ DGUIProject::DGUIProject(QString *dir, QString *name)
     this->getStructureAsJson();
 }
 
+/*
+ * warning - hefty operation
+ * but returns a neatly packed c++ structure
+ * Q.Q
+ */
+QMap<QString, DGUIStructureValue*>* getStructureAsTree()
+{
+    QMap<QString, DGUIStructureValue*>* fileStructure = new QMap<QString, DGUIStructureValue*>*;
+    //DGUIStructureValue *ultimateChild = new DGUIStructureValue("#childrenOfThisParentKappaKappaChameleon");
 
+    foreach(DGUIFile* f, files){
+        QString dirNew = f->dir.right(f->dir.size() - this->dir.size() - 1);
+        QMap<QString, DGUIStructureValue*> *proc = fileStructure;
+        //DGUIStructureValue *procParent = ultimateChild;
+        int i = 0;
+
+        while((i = dirNew.indexOf("/")) != -1){
+            QString subDir = dirNew.left(i);
+            dirNew = dirNew.right(dirNew.size() - i - 1);
+            i = dirNew.indexOf("/");
+
+            if(!proc->contains(subDir)){
+                proc->insert(dirNew, new DGUIStructureValue(dirNew));
+            }
+
+            //procParent = proc->operator [](dirNew);
+            proc = proc->operator [](dirNew)->children;
+        }
+        DGUIStructureValue *child;
+        if(!proc->contains("#childrenOfThisParentKappaKappaChameleon")){
+            child = new DGUIStructureValue("#childrenOfThisParentKappaKappaChameleon");
+            proc->insert("#childrenOfThisParentKappaKappaChameleon", child);
+        }else{
+            child = proc->operator []("#childrenOfThisParentKappaKappaChameleon");
+        }
+
+        if(child->superChildList){
+            child->superChildList = new QList<QString*>();
+        }
+        child->superChildList->append(dirNew);
+    }
+
+    return fileStructure;
+}
 
 /*
  * rip- json objects are read only

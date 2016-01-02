@@ -6,6 +6,7 @@
 #include <QString>
 #include <QJsonObject>
 
+#include "model/triggers/dguistructurevalue.h"
 #include "ui/layout_shared/foldline.h"
 #include "model/triggers/dguiproject.h"
 #include "ui/layout/flowlayout.h"
@@ -23,7 +24,7 @@ public:
 
     loadFolder(DGUIProject*);
     loadFolder(QString*);
-    loadSubFolder(QString, FoldLine*, QJsonObject*);
+    loadSubFolder(QString, FoldLine*, DGUIStructureValue*);
 signals:
 
 public slots:

@@ -4,6 +4,7 @@
 #include <QString>
 #include <QJsonObject>
 #include "dguifile.h"
+#include "dguistructurevalue.h"
 class DGUIProject
 {
 public:
@@ -12,6 +13,7 @@ public:
     QList<DGUIFile*> files;
     QString dir;
     QJsonObject getStructureAsJson();
+    QMap<QString, DGUIStructureValue*>* getStructureAsTree();
 };
 
 #endif // DGUIPROJECT_H

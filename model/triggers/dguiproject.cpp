@@ -31,7 +31,7 @@ DGUIProject::DGUIProject(QString *dir, QString *name)
     }
 
     qDebug("Done Initialize Project");
-    this->getStructureAsJson();
+    //this->getStructureAsJson();
 }
 
 /*
@@ -39,29 +39,34 @@ DGUIProject::DGUIProject(QString *dir, QString *name)
  * but returns a neatly packed c++ structure
  * Q.Q
  */
-QMap<QString, DGUIStructureValue*>* getStructureAsTree()
+QMap<QString, DGUIStructureValue*>* DGUIProject::getStructureAsTree()
 {
-    QMap<QString, DGUIStructureValue*>* fileStructure = new QMap<QString, DGUIStructureValue*>*;
+    QMap<QString, DGUIStructureValue*>* fileStructure = new QMap<QString, DGUIStructureValue*>();
     //DGUIStructureValue *ultimateChild = new DGUIStructureValue("#childrenOfThisParentKappaKappaChameleon");
-
+    qDebug("Get structure as tree 2");
     foreach(DGUIFile* f, files){
         QString dirNew = f->dir.right(f->dir.size() - this->dir.size() - 1);
+        qDebug("Enum on file " + dirNew.toLatin1());
         QMap<QString, DGUIStructureValue*> *proc = fileStructure;
         //DGUIStructureValue *procParent = ultimateChild;
         int i = 0;
 
         while((i = dirNew.indexOf("/")) != -1){
             QString subDir = dirNew.left(i);
+            qDebug("Child : " + subDir.toLatin1());
             dirNew = dirNew.right(dirNew.size() - i - 1);
             i = dirNew.indexOf("/");
 
             if(!proc->contains(subDir)){
-                proc->insert(dirNew, new DGUIStructureValue(dirNew));
+                qDebug("nada");
+                proc->insert(subDir, new DGUIStructureValue(&dirNew));
+            }else{
+                qDebug("already has?");
             }
-
-            //procParent = proc->operator [](dirNew);
-            proc = proc->operator [](dirNew)->children;
+            proc = proc->operator [](subDir)->children;
         }
+        qDebug("Somewhat done...");
+
         DGUIStructureValue *child;
         if(!proc->contains("#childrenOfThisParentKappaKappaChameleon")){
             child = new DGUIStructureValue("#childrenOfThisParentKappaKappaChameleon");
@@ -69,13 +74,16 @@ QMap<QString, DGUIStructureValue*>* getStructureAsTree()
         }else{
             child = proc->operator []("#childrenOfThisParentKappaKappaChameleon");
         }
-
-        if(child->superChildList){
-            child->superChildList = new QList<QString*>();
+        qDebug("Almost done...");
+        if(!child->superChildList){
+            child->superChildList = new QList<QString>();
         }
+        qDebug("Almost.....! %d %d " + dirNew.toLatin1(), child, child->superChildList);
         child->superChildList->append(dirNew);
+        qDebug("Done!");
     }
 
+    qDebug("Get structure as tree 3");
     return fileStructure;
 }
 

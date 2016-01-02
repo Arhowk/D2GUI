@@ -2,10 +2,13 @@
 #include <QPushButton>
 #include <QFont>
 #include <QTimer>
+#include <QList>
 #include <QGridLayout>
 #include <QJsonArray>
+#include <QMap>
 
 #include "ui/project_explorer/sprojectexplorer.h"
+#include "model/triggers/dguistructurevalue.h"
 #include "ui/layout_shared/foldline.h"
 #include "ui/layout/qclicklabel.h"
 
@@ -46,39 +49,59 @@ SProjectExplorer::loadFolder(QString * dir){
     return SProjectExplorer::loadFolder(new DGUIProject(dir));
 }
 
-SProjectExplorer::loadSubFolder(QString path, FoldLine *line, QJsonObject* obj){
-    QJsonObject obj2 = *obj;
-    foreach(QString key, obj->keys()){
-        if(key == "dirContainer"){
-            QJsonArray arr = obj2["dirContainer"].toArray();
-            foreach(QJsonValue value, arr){
+SProjectExplorer::loadSubFolder(QString path, FoldLine *line, DGUIStructureValue* obj){
+    foreach(QString key, obj->children->keys()){
+        if(key == "#childrenOfThisParentKappaKappaChameleon"){
+            DGUIStructureValue *arr = obj->children->operator []("#childrenOfThisParentKappaKappaChameleon");
+            //QList<QString>* arrRaw= arr->superChildList
+            foreach(QString value, *(arr->superChildList)){
                 FoldLine *newLine = new FoldLine();
                 newLine->SetImage("page");
-                newLine->SetText(value.toString());
+                newLine->SetText(value);
                 line->AddChild(newLine);
             }
+        }else{
+            FoldLine *newLine = new FoldLine();
+            newLine->SetText(key);
+            DGUIStructureValue* obj22 = obj->children->operator [](key);
+            this->loadSubFolder(path, newLine,  obj22);
+            qDebug("Appending widget main %d", newLine);
+            line->AddChild(newLine);
         }
     }
 }
 
 SProjectExplorer::loadFolder(DGUIProject * dir){
-    QJsonObject obj = dir->getStructureAsJson();
+    qDebug("Get Structure As Tree");
+    QMap<QString, DGUIStructureValue*>* obj = dir->getStructureAsTree();
     qDebug("ALRIGHT WE DONE GETTING THE JSON OF THE FOLDER");
+    FoldLine *masterLine = new FoldLine();
+    masterLine->SetText("scripts");
     QString workingPath = dir->dir;
     qDebug("ALRIGHT WE LOADING THE FOLDER");
-    foreach(QString key, obj.keys()){
+    foreach(QString key, obj->keys()){
         qDebug("ALRIGHT WE LOADING " + key.toLatin1());
-        if(key == "dirContainer"){
+        if(key == "#childrenOfThisParentKappaKappaChameleon"){
             //foreach(QString key, )
+            DGUIStructureValue *arr = obj->operator []("#childrenOfThisParentKappaKappaChameleon");
+            //QList<QString>* arrRaw= arr->superChildList
+            foreach(QString value, *(arr->superChildList)){
+                FoldLine *newLine = new FoldLine();
+                newLine->SetImage("page");
+                newLine->SetText(value);
+                masterLine->AddChild(newLine);
+           }
+
         }else{
             FoldLine *newLine = new FoldLine();
             newLine->SetText(key);
-            QJsonObject obj22 = obj[key].toObject();
-            this->loadSubFolder(workingPath, newLine,  &obj22);
+            DGUIStructureValue* obj22 = obj->operator [](key);
+            this->loadSubFolder(workingPath, newLine,  obj22);
             qDebug("Appending widget main %d", newLine);
-            flow->addWidget(newLine);
+            masterLine->AddChild(newLine);
         }
     }
+    flow->addWidget(masterLine);
     qDebug("ALRIGHT WE DONE THE FOLDER");
 }
 

@@ -32,8 +32,6 @@ DGUIFile::DGUIFile(QString * dirPath, QString * relPath)
             const QJsonObject &argJson = argDoc.object();
             if(argJson.length() == 0){
                 qWarning("JSON Error on file " + path.toLatin1());
-            }else{
-                qDebug("Load file good! " + path.toLatin1());
             }
         }else{
             //load as binary

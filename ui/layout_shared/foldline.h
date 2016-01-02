@@ -20,7 +20,7 @@ public:
     QClickLabel * collapseClose;
     QClickLabel * imageIcon;
     QWidget * notificationImage;
-    QLabel * textLabel;
+    QClickLabel * textLabel;
 
 
     int childrenVisible = 1;
@@ -37,6 +37,10 @@ public:
 signals:
 
 public slots:
+    OnLabelPressed();
+    OnLabelClicked();
+    OnLabelReleased();
+
     OnCollapseClicked();
     OnLineClicked();
     OnLinkClicked();

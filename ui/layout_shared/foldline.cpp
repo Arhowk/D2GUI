@@ -26,6 +26,22 @@ FoldLine::OnCollapseClicked()
     }
 }
 
+
+FoldLine::OnLabelPressed()
+{
+
+}
+
+FoldLine::OnLabelClicked()
+{
+
+}
+
+FoldLine::OnLabelReleased()
+{
+
+}
+
 FoldLine::OnLineClicked()
 {
 
@@ -54,7 +70,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     collapseOpen = new QClickLabel();
     collapseClose = new QClickLabel();
     imageIcon = new QClickLabel();
-    textLabel = new QLabel();
+    textLabel = new QClickLabel();
 
     //Bottom
     QLabel * label = new QLabel();
@@ -91,7 +107,9 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     //Rest
 
     gridLayout->addWidget(upperLine,0,0,1,2);
-    gridLayout->addWidget(childrenBox,1,1,1,9999); //TODO: Find a better solution than to make the children box span 500 columns...
+
+    //So spanning 9999 columns lags like crazy when you're nesting columns because you're performing a lookup on a potentially 10,000 wide grid.. GG
+    gridLayout->addWidget(childrenBox,1,1,1,10); //TODO: Find a better solution than to make the children box span 500 columns...
     gridLayout->setColumnMinimumWidth(0, 19);
     gridLayout->setColumnMinimumWidth(3, 100);
 

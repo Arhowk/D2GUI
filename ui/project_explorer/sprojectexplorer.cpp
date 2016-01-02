@@ -65,22 +65,17 @@ SProjectExplorer::loadSubFolder(QString path, FoldLine *line, DGUIStructureValue
             newLine->SetText(key);
             DGUIStructureValue* obj22 = obj->children->operator [](key);
             this->loadSubFolder(path, newLine,  obj22);
-            qDebug("Appending widget main %d", newLine);
             line->AddChild(newLine);
         }
     }
 }
 
 SProjectExplorer::loadFolder(DGUIProject * dir){
-    qDebug("Get Structure As Tree");
     QMap<QString, DGUIStructureValue*>* obj = dir->getStructureAsTree();
-    qDebug("ALRIGHT WE DONE GETTING THE JSON OF THE FOLDER");
     FoldLine *masterLine = new FoldLine();
     masterLine->SetText("scripts");
     QString workingPath = dir->dir;
-    qDebug("ALRIGHT WE LOADING THE FOLDER");
     foreach(QString key, obj->keys()){
-        qDebug("ALRIGHT WE LOADING " + key.toLatin1());
         if(key == "#childrenOfThisParentKappaKappaChameleon"){
             //foreach(QString key, )
             DGUIStructureValue *arr = obj->operator []("#childrenOfThisParentKappaKappaChameleon");
@@ -94,15 +89,14 @@ SProjectExplorer::loadFolder(DGUIProject * dir){
 
         }else{
             FoldLine *newLine = new FoldLine();
-            newLine->SetText(key);
+            newLine->SetText(key + QString("<a href=\"http://www.google.com\"> go here </a> hello"));
+
             DGUIStructureValue* obj22 = obj->operator [](key);
             this->loadSubFolder(workingPath, newLine,  obj22);
-            qDebug("Appending widget main %d", newLine);
             masterLine->AddChild(newLine);
         }
     }
     flow->addWidget(masterLine);
-    qDebug("ALRIGHT WE DONE THE FOLDER");
 }
 
 

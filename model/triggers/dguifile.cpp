@@ -20,7 +20,7 @@ DGUIFile::DGUIFile(QString * dirPath, QString * relPath)
     }else{
         path = *dirPath;
     }
-
+    this->dir = path;
     QFile file(path);
 
     if (!file.open(QIODevice::ReadOnly)) {

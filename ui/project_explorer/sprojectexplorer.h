@@ -3,7 +3,13 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QString>
+#include <QJsonObject>
+
+#include "ui/layout_shared/foldline.h"
+#include "model/triggers/dguiproject.h"
 #include "ui/layout/flowlayout.h"
+
 class SProjectExplorer : public QWidget
 {
     Q_OBJECT
@@ -12,6 +18,12 @@ public:
     FlowLayout * flow;
     QLabel * lbl;
     int f;
+
+    QList<QLine*> files;
+
+    loadFolder(DGUIProject*);
+    loadFolder(QString*);
+    loadSubFolder(QString, FoldLine*, QJsonObject*);
 signals:
 
 public slots:

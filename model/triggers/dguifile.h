@@ -9,6 +9,7 @@ public:
     DGUIFile(QString* ,QString*qt=0);
     static DGUIFile CreateBetaFile();
 
+    QString dir;
     QString note;
     QList<DGUILine*> events;
     QList<DGUILine*> conditions;

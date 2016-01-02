@@ -5,8 +5,9 @@
 class DGUIProject
 {
 public:
-    DGUIProject();
-
+    DGUIProject(QString dir, QString name=0);
+    QString name;
+    QList<DGUIFile*> files;
 };
 
 #endif // DGUIPROJECT_H

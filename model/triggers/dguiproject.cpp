@@ -1,7 +1,10 @@
 #include "dguiproject.h"
 
-DGUIProject::DGUIProject()
+#include <QString>
+DGUIProject::DGUIProject(QString dir, QString name)
 {
-
+    if(!name){
+        name = dir.right(dir.size() - dir.lastIndexOf("/"));
+    }
 }
 

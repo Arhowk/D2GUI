@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     model/triggers/dguiline.cpp \
     model/triggers/dguiargument.cpp \
     model/triggers/dguikeydatabase.cpp \
-    model/triggers/dguiproject.cpp
+    model/triggers/dguiproject.cpp \
+    ui/layout_shared/stoolbar.cpp
 
 HEADERS  += \
     smainlayout.h \
@@ -42,7 +43,8 @@ HEADERS  += \
     model/triggers/dguiline.h \
     model/triggers/dguiargument.h \
     model/triggers/dguikeydatabase.h \
-    model/triggers/dguiproject.h
+    model/triggers/dguiproject.h \
+    ui/layout_shared/stoolbar.h
 
 FORMS    += mainwindow.ui
 

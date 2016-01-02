@@ -2,7 +2,7 @@
 #define DGUIFILE_H
 
 #include <QString>
-
+#include "dguiline.h"
 class DGUIFile
 {
 public:

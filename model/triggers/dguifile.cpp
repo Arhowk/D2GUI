@@ -57,5 +57,7 @@ DGUIFile DGUIFile::CreateBetaFile()
     event1->setArgument(0, new DGUIArgument(1, new QString("-1")));
     event1->setArgument(1, new DGUIArgument(0, new QString("-1")));
     event1->setArgument(2, new DGUIArgument(2, new QString("1")));
-    qDebug(event1->toPrintString());
+    qDebug("Beta done");
+    return DGUIFile();
+    //qDebug(event1->toPrintString());
 }

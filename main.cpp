@@ -3,18 +3,20 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include <QImage>
+#include <QDir>
 
 #include "smainlayout.h"
 #include "ui/layout_shared/foldline.h"
 
 #include "model/triggers/dguifile.h"
 #include "model/triggers/dguikeydatabase.h"
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     //MainWindow w;
     //w.show();
-
    // SBetaLayout h;
    // h.show();=
     DGUIKeyDatabase::init();

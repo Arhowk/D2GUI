@@ -1,16 +1,18 @@
-var t = {
-    DOTA_Team: {
-        pseudo: "number",
-        dat: {
+{
+    "DOTA_Team": {
+        "key": 0,
+        "pseudo": "number",
+        "dat": {
             "Radiant": 1,
             "Dire": 2,
-            "Any Team": -1,
+            "Any Team": -1
         }
     },
 
-    DOTA_TowerPos: {
-        pseudo: "number",
-        dat: {
+    "DOTA_TowerPos": {
+        "key": 1,
+        "pseudo": "number",
+        "dat": {
             "Any": -1,
             "TopAny": 1,
             "TopOuter": 2,
@@ -28,9 +30,10 @@ var t = {
         }
     },
 
-    Entity_KillMethod: {
-        pseudo: "number",
-        dat: {
+    "Entity_KillMethod": {
+        "key": 2,
+        "pseudo": "number",
+        "dat": {
             "Any": -1,
             "Denied": 1,
             "Killed": 2,

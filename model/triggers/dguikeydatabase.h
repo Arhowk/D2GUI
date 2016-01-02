@@ -11,8 +11,10 @@ public:
     DGUIKeyDatabase();
     static DGUILine* getKeyWithIndex(unsigned char, unsigned char);
     static DGUIArgument* getArgumentWithIndex(unsigned char);
+    static DGUIArgument* getArgumentWithName(QString);
     static QString* getArgumentNameWithIndex(unsigned char, QString*);
     static init();
+    static QString workingDir;
 
     static QJsonObject triggerDatabase;
     static QJsonObject argumentDatabase;

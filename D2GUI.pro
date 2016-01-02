@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     model/triggers/dguifile.cpp \
     model/triggers/dguiline.cpp \
     model/triggers/dguiargument.cpp \
-    model/triggers/dguikeydatabase.cpp
+    model/triggers/dguikeydatabase.cpp \
+    model/triggers/dguiproject.cpp
 
 HEADERS  += \
     smainlayout.h \
@@ -40,7 +41,8 @@ HEADERS  += \
     model/triggers/dguifile.h \
     model/triggers/dguiline.h \
     model/triggers/dguiargument.h \
-    model/triggers/dguikeydatabase.h
+    model/triggers/dguikeydatabase.h \
+    model/triggers/dguiproject.h
 
 FORMS    += mainwindow.ui
 

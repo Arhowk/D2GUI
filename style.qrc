@@ -12,5 +12,6 @@
         <file>images/lightning.png</file>
         <file>images/rainbow.png</file>
         <file>resources/argumentdatabase.js</file>
+        <file>resources/triggerdatabase.js</file>
     </qresource>
 </RCC>

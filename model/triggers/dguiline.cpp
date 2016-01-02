@@ -27,9 +27,10 @@ DGUILine::setArgument(unsigned char index, DGUIArgument *arg)
     if(prototypeList->size() > index){
         DGUIArgument *argb = prototypeList->at(index);
         if(arg->typeMatch(argb)){
-
+            qDebug("Arg Match!");
         }else{
             qWarning("Attempted to set an argument for a DGUILine with the wrong arg type");
+            qWarning("%d %d", argb->argType, arg->argType);
         }
     }else{
         qWarning("Attempted to set an argument for a DGUILine beyond its argument count");

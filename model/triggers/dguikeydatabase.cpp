@@ -2,6 +2,8 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QCoreApplication>
+#include <QJsonArray>
 
 #include "dguikeydatabase.h"
 #include "dguiline.h"
@@ -10,6 +12,7 @@
 
 QJsonObject DGUIKeyDatabase::argumentDatabase = QJsonObject();
 QJsonObject DGUIKeyDatabase::triggerDatabase = QJsonObject();
+QString DGUIKeyDatabase::workingDir = QString();
 
 DGUILine* DGUIKeyDatabase::getKeyWithIndex(unsigned char type, unsigned char index)
 {
@@ -18,15 +21,56 @@ DGUILine* DGUIKeyDatabase::getKeyWithIndex(unsigned char type, unsigned char ind
 
     QList<DGUIArgument*>* protoList = new QList<DGUIArgument*>();
 
-    //regex finder- "\\{([a-zA-Z]+)\\}"
+    //search for all of the arg instances
+    QString pattern = "\\{([a-zA-Z_]+)\\}";\
+    QRegExp rx(pattern);
+
+    Qt::CaseSensitivity cs = Qt::CaseInsensitive;
+    rx.setCaseSensitivity(cs);
+
+    if(!rx.isValid()){
+        qWarning("Invalid regex");
+    }else{
+        QString procTxt = relevant["dat"].toArray()[0].toObject()["text"].toString();
+        QList<DGUIArgument*>* protoList = new QList<DGUIArgument*>();
+        QStringList list;
+        int pos = 0;
+
+        while ((pos = rx.indexIn(procTxt, 0)) != -1) {
+            QString proc = rx.cap(1);
+            //list << proc;
+            DGUIArgument *newArg = getArgumentWithName(proc);
+            protoList->append(newArg);
+            qDebug("Grabbed : " + proc.toLatin1());
+            int invertedPos = procTxt.length() - pos;
+            procTxt = procTxt.left(pos) + procTxt.right(invertedPos - proc.length() - 2);
+        }
 
 
-    DGUILine * line = new DGUILine(index, true, new QList<DGUIArgument*>(), new QList<DGUIArgument*>());
-    return line;
+        DGUILine * line = new DGUILine(index, true, new QList<DGUIArgument*>(), protoList);
+
+        qDebug("Processed Successfully");
+        return line;
+    }
 }
 DGUIArgument* DGUIKeyDatabase::getArgumentWithIndex(unsigned char index)
 {
 
+}
+DGUIArgument* DGUIKeyDatabase::getArgumentWithName(QString name)
+{
+    qDebug("Get Arg With Name");
+    foreach(QString key, argumentDatabase.keys()){
+        qDebug("Enum : " + key.toLatin1());
+        if(key == name){
+            qDebug("Found!");
+            QJsonObject obj = argumentDatabase[key].toObject();
+            DGUIArgument *arg = new DGUIArgument(obj["key"].toInt(),new QString(""), 1);
+
+
+            return arg;
+        }
+    }
 }
 
 QString* DGUIKeyDatabase::getArgumentNameWithIndex(unsigned char index, QString * data)
@@ -37,44 +81,46 @@ QString* DGUIKeyDatabase::getArgumentNameWithIndex(unsigned char index, QString 
 
 DGUIKeyDatabase::init()
 {
+   //Setup working dir
 
-    QFile triggerFile(QStringLiteral("D:/Code/Qt/D2GUI/resources/triggerdatabase.js")); //im sorry i know this is an absolute dir
+    QString dir = QCoreApplication::applicationDirPath();
+    int indof = dir.lastIndexOf("/");
+    int indof2 = dir.lastIndexOf("/", indof-1);
+    workingDir = dir.left(indof2+1);
+
+    QFile triggerFile(QString(workingDir.toLatin1() + "D2GUI/resources/triggerdatabase.js"));
 
     if (!triggerFile.open(QIODevice::ReadOnly)) {
-        qWarning("Couldn't open save file.");
+        qWarning("Couldn't open trigger file.");
         return false;
     }
 
     QByteArray saveData = triggerFile.readAll();
-    qDebug("byte array: %d", saveData.size());
 
     QJsonDocument triggerDoc(QJsonDocument::fromJson(saveData));
 
     const QJsonObject &json = triggerDoc.object();
 
-    qDebug("finished: %d", json.length());
-
-    qDebug(json["Events"].toObject()["temp"].toString().toUtf8().constData());
-
     triggerFile.close();
 
 
 
-    QFile argumentFile(QStringLiteral("D:/Code/Qt/D2GUI/resources/argumentdatabase.js")); //im sorry i know this is an absolute dir
+    QFile argumentFile(QString(workingDir.toLatin1() + "D2GUI/resources/argumentdatabase.js")); //im sorry i know this is an absolute dir
 
     if (!argumentFile.open(QIODevice::ReadOnly)) {
-        qWarning("Couldn't open save file.");
+        qWarning("Couldn't open argument file.");
         return false;
     }
 
     QByteArray argData = argumentFile.readAll();
-    qDebug("byte array: %d", argData.size());
 
     QJsonDocument argDoc(QJsonDocument::fromJson(argData));
 
     const QJsonObject &argJson = argDoc.object();
 
-    qDebug("finished: %d", argJson.length());
+    qDebug("Trigger Size: %d", json.size());
+    qDebug("Argument Size: %d", argJson.size());
+
     argumentFile.close();
 
 

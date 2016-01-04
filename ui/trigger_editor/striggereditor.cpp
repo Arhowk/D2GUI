@@ -1,13 +1,19 @@
+#include <QtDebug>
 #include <QGridLayout>
 
 #include "ui/layout/flowlayout.h"
 #include "ui/trigger_editor/striggereditor.h"
 #import "ui/layout_shared/foldline.h"
+STriggerEditor *STriggerEditor::instance = 0;
+
+STriggerEditor* STriggerEditor::getInstance(){
+    return STriggerEditor::instance;
+}
 
 STriggerEditor::STriggerEditor(QWidget *parent) : QWidget(parent)
 {
    // QGridLayout * gridLayout = new QGridLayout;
-
+    STriggerEditor::instance = this;
     FlowLayout * f = new FlowLayout;
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -20,8 +26,11 @@ STriggerEditor::STriggerEditor(QWidget *parent) : QWidget(parent)
     events->SetImage("bell");
 
     FoldLine * towerKilled = new FoldLine();
-    towerKilled->SetText(tr("DOTA- A tower from team (Any Team) was destroyed"));
+    towerKilled->SetText(tr("DOTA- A tower from team <a href=\"http:\\www.google.com\">(Any Team)</a> was destroyed"));
     towerKilled->SetImage(tr("rainbow"));
+    towerKilled->textLabel->shouldHighlight = false;
+    towerKilled->textLabel->setOpenExternalLinks(false);
+    connect(towerKilled->textLabel, SIGNAL(linkActivated(QString)), this, SLOT(onLinkClicked(QString)));
 
     FoldLine * conditions = new FoldLine();
     conditions->SetText(tr("Conditions"));
@@ -46,5 +55,11 @@ STriggerEditor::STriggerEditor(QWidget *parent) : QWidget(parent)
 
    // gridLayout->addWidget(f,0,0);
     setLayout(f);
+}
+
+STriggerEditor::onLinkClicked(QString str)
+{
+    qDebug("Hello");
+    qDebug() << str;
 }
 

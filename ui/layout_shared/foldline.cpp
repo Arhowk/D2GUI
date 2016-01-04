@@ -70,7 +70,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     collapseOpen = new QClickLabel();
     collapseClose = new QClickLabel();
     imageIcon = new QClickLabel();
-    textLabel = new QClickLabel();
+    textLabel = new QClickLabel("",0,true);
 
     //Bottom
     QLabel * label = new QLabel();
@@ -132,9 +132,20 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 }
 
 
-FoldLine::AddChild(FoldLine * child)
+FoldLine::AddChild(FoldLine * child, bool sorted)
 {
-    childrenBoxLayout->addWidget(child);
+    if(sorted){
+        bool isFolder = this->icon != 0;
+        if(childrenBoxLayout->children().size() == 0){
+            childrenBoxLayout->addWidget(child);
+        }else{
+            foreach(QObject *child, childrenBoxLayout->children()){
+
+            }
+        }
+    }else{
+        childrenBoxLayout->addWidget(child);
+    }
 }
 
 FoldLine::RemoveChild(FoldLine * child)
@@ -144,6 +155,7 @@ FoldLine::RemoveChild(FoldLine * child)
 
 FoldLine::SetImage(QString dir)
 {
+    this->icon = &dir;
     imageIcon->setPixmap(QPixmap(QString(":/images/") + (dir) + QString(".png")));
 }
 

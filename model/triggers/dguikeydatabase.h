@@ -13,6 +13,7 @@ public:
     static DGUIArgument* getArgumentWithIndex(unsigned char);
     static DGUIArgument* getArgumentWithName(QString);
     static QString* getArgumentNameWithIndex(unsigned char, QString*);
+    static DGUILine* getLine(QString,QString,int);
     static init();
     static QString workingDir;
 

@@ -5,7 +5,8 @@
     "Events":
     [
         {
-            "Key": "0",
+            "Key": "DOTA",
+            "SubKey": "0",
             "Arguments":
             [
                 "-1",

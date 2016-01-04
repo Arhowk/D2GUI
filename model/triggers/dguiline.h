@@ -16,6 +16,7 @@ public:
     QList<DGUIArgument*>* argList;
     QList<DGUIArgument*>* prototypeList;
     DGUILine *prototypeLine;
+    QList<DGUILine*>* childrenList;
 
     appendArgument(DGUIArgument*);
     DGUILine* branch();

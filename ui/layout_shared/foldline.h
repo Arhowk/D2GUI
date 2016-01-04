@@ -21,12 +21,13 @@ public:
     QClickLabel * imageIcon;
     QWidget * notificationImage;
     QClickLabel * textLabel;
+    QString *icon;
 
 
     int childrenVisible = 1;
     SetChild(FoldLine * child);
     RemoveChild(FoldLine * child);
-    AddChild(FoldLine * child);
+    AddChild(FoldLine * child, bool sorted = false);
     SetImage(QString dir);
     SetText(QString str);
 

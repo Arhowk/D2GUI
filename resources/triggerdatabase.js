@@ -1,7 +1,6 @@
 {
     "Events":
     {
-        "temp": "hi",
         "KEY": 0,
 
         "DOTA":

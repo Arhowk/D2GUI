@@ -89,7 +89,7 @@ SProjectExplorer::loadFolder(DGUIProject * dir){
 
         }else{
             FoldLine *newLine = new FoldLine();
-            newLine->SetText(key + QString("<a href=\"http://www.google.com\"> go here </a> hello"));
+            newLine->SetText(key);
 
             DGUIStructureValue* obj22 = obj->operator [](key);
             this->loadSubFolder(workingPath, newLine,  obj22);

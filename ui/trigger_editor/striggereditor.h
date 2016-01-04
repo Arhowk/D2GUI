@@ -8,10 +8,12 @@ class STriggerEditor : public QWidget
     Q_OBJECT
 public:
     explicit STriggerEditor(QWidget *parent = 0);
-
+    static STriggerEditor *instance;
+    static STriggerEditor* getInstance();
 signals:
 
 public slots:
+    onLinkClicked(QString);
 };
 
 #endif // STRIGGEREDITOR_H

@@ -53,6 +53,45 @@ DGUILine* DGUIKeyDatabase::getKeyWithIndex(unsigned char type, unsigned char ind
         return line;
     }
 }
+
+DGUILine* DGUIKeyDatabase::getLine(QString big, QString key, int sub)
+{
+    QJsonObject relevant = triggerDatabase[big].toObject()[key].toObject(); //TODO: Store the data in such a way that char lookup is O(n)
+
+
+    QList<DGUIArgument*>* protoList = new QList<DGUIArgument*>();
+
+    //search for all of the arg instances
+    QString pattern = "\\{([a-zA-Z_]+)\\}";\
+    QRegExp rx(pattern);
+
+    Qt::CaseSensitivity cs = Qt::CaseInsensitive;
+    rx.setCaseSensitivity(cs);
+
+    if(!rx.isValid()){
+        qWarning("Invalid regex");
+    }else{
+        QString procTxt = relevant["dat"].toArray()[sub].toObject()["text"].toString();
+        QList<DGUIArgument*>* protoList = new QList<DGUIArgument*>();
+        QStringList list;
+        int pos = 0;
+
+        while ((pos = rx.indexIn(procTxt, 0)) != -1) {
+            QString proc = rx.cap(1);
+            //list << proc;
+            DGUIArgument *newArg = getArgumentWithName(proc);
+            protoList->append(newArg);
+            int invertedPos = procTxt.length() - pos;
+            procTxt = procTxt.left(pos) + procTxt.right(invertedPos - proc.length() - 2);
+        }
+
+
+        DGUILine * line = new DGUILine(sub, true, new QList<DGUIArgument*>(), protoList);
+
+        qDebug("Processed Successfully");
+        return line;
+    }
+}
 DGUIArgument* DGUIKeyDatabase::getArgumentWithIndex(unsigned char index)
 {
 

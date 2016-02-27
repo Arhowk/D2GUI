@@ -69,6 +69,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     QGridLayout * upperGridLayout = new QGridLayout(upperLine);
     collapseOpen = new QClickLabel();
     collapseClose = new QClickLabel();
+    blank = new QClickLabel();
     imageIcon = new QClickLabel();
     textLabel = new QClickLabel("",0,true);
 
@@ -81,6 +82,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     //Top
     collapseOpen->setPixmap(QPixmap(":/images/closed.png"));
     collapseClose->setPixmap(QPixmap(":/images/opened.png"));
+    blank->setPixmap(QPixmap(":/images/blank.png"));
     imageIcon->setPixmap(QPixmap(":/images/folder.png"));
 
 
@@ -97,10 +99,12 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     upperGridLayout->addWidget(textLabel,0,3,1, 1, Qt::AlignLeft);
     upperGridLayout->addWidget(collapseOpen,0,0);
     upperGridLayout->addWidget(collapseClose,0,0);
+    upperGridLayout->addWidget(blank,0,0);
     upperGridLayout->addWidget(imageIcon,0,1);
 
     collapseClose->show();
     collapseOpen->hide();
+    blank->hide();
 
     //Bottom
 
@@ -134,13 +138,16 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 
 FoldLine::AddChild(FoldLine * child, bool sorted)
 {
-    if(sorted){
-        bool isFolder = this->icon != 0;
+    if(sorted || true){
         if(childrenBoxLayout->children().size() == 0){
             childrenBoxLayout->addWidget(child);
         }else{
+            int lastFolderIndex = -1;
+            QString *lastFolder = 0;
             foreach(QObject *child, childrenBoxLayout->children()){
-
+                int index = childrenBoxLayout->children().indexOf(child);
+                FoldLine *foldChild = (FoldLine*) child;
+                bool isChildFolder = foldChild->icon == 0;
             }
         }
     }else{
@@ -164,4 +171,15 @@ FoldLine::SetText(QString qstr)
     textLabel->setText(qstr);
 }
 
-
+FoldLine::SetHasCollapse(bool hasCollapse)
+{
+    if(hasCollapse){
+        this->OnCollapseClicked();
+        this->OnCollapseClicked();
+        this->blank->hide();
+    }else{
+        this->collapseClose->hide();
+        this->collapseOpen->hide();
+        this->blank->show();
+    }
+}

@@ -19,5 +19,6 @@
         <file>images/page_copy.png</file>
         <file>images/paste_plain.png</file>
         <file>resources/examplefile.json</file>
+        <file>images/blank.png</file>
     </qresource>
 </RCC>

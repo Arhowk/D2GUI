@@ -19,6 +19,7 @@ public:
     QClickLabel * collapseOpen;
     QClickLabel * collapseClose;
     QClickLabel * imageIcon;
+    QClickLabel * blank;
     QWidget * notificationImage;
     QClickLabel * textLabel;
     QString *icon;
@@ -30,6 +31,7 @@ public:
     AddChild(FoldLine * child, bool sorted = false);
     SetImage(QString dir);
     SetText(QString str);
+    SetHasCollapse(bool hasCollapse);
 
     static QImage * collapseOpenImage;
     static QImage * collapseCloseImage;

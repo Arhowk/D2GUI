@@ -57,7 +57,8 @@ SProjectExplorer::loadSubFolder(QString path, FoldLine *line, DGUIStructureValue
             foreach(QString value, *(arr->superChildList)){
                 FoldLine *newLine = new FoldLine();
                 newLine->SetImage("page");
-                newLine->SetText(value);
+                newLine->SetText(value);\
+                newLine->SetHasCollapse(false);
                 line->AddChild(newLine);
             }
         }else{

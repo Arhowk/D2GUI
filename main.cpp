@@ -21,12 +21,8 @@ int main(int argc, char *argv[])
     //w.show();
    // SBetaLayout h;
    // h.show();=
-    qDebug("0");
     DGUIKeyDatabase::init();
     DGUIFile::CreateBetaFile();
-    qDebug("3");
-    qDebug("%d", DGUIKeyDatabase::argumentDatabase.length());
-    qDebug("%d", DGUIKeyDatabase::triggerDatabase.length());
     QMainWindow window;
     SToolbar::CreateToolbar(&window);
     QWidget widget;

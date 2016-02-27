@@ -5,6 +5,7 @@
 #include <QFrame>
 #include <QLabel>
 #include <QImage>
+#include <QVBoxLayout>
 #include "ui/layout/qclicklabel.h"
 #include "ui/layout/flowlayout.h"
 
@@ -14,7 +15,7 @@ class FoldLine : public QFrame
 public:
     explicit FoldLine(QWidget *parent = 0);
     FoldLine * children;
-    FlowLayout * childrenBoxLayout;
+    QVBoxLayout * childrenBoxLayout;
     QWidget * childrenBox;
     QClickLabel * collapseOpen;
     QClickLabel * collapseClose;
@@ -23,11 +24,13 @@ public:
     QWidget * notificationImage;
     QClickLabel * textLabel;
     QString *icon;
+    QString text;
 
 
     int childrenVisible = 1;
     SetChild(FoldLine * child);
     RemoveChild(FoldLine * child);
+    QString GetText();
     AddChild(FoldLine * child, bool sorted = false);
     SetImage(QString dir);
     SetText(QString str);

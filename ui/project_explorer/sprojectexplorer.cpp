@@ -53,7 +53,6 @@ SProjectExplorer::loadSubFolder(QString path, FoldLine *line, DGUIStructureValue
     foreach(QString key, obj->children->keys()){
         if(key == "#childrenOfThisParentKappaKappaChameleon"){
             DGUIStructureValue *arr = obj->children->operator []("#childrenOfThisParentKappaKappaChameleon");
-            //QList<QString>* arrRaw= arr->superChildList
             foreach(QString value, *(arr->superChildList)){
                 FoldLine *newLine = new FoldLine();
                 newLine->SetImage("page");
@@ -85,7 +84,8 @@ SProjectExplorer::loadFolder(DGUIProject * dir){
                 FoldLine *newLine = new FoldLine();
                 newLine->SetImage("page");
                 newLine->SetText(value);
-                masterLine->AddChild(newLine);
+                newLine->SetHasCollapse(false);
+                masterLine->AddChild(newLine, true);
            }
 
         }else{
@@ -94,7 +94,7 @@ SProjectExplorer::loadFolder(DGUIProject * dir){
 
             DGUIStructureValue* obj22 = obj->operator [](key);
             this->loadSubFolder(workingPath, newLine,  obj22);
-            masterLine->AddChild(newLine);
+            masterLine->AddChild(newLine, true);
         }
     }
     flow->addWidget(masterLine);

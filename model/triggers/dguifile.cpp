@@ -8,6 +8,10 @@
 #include <QJsonArray>
 #include <QJsonValue>
 
+/*
+ * Represents the contents of a trigger area
+ * This doesn't parse any data but just acts as a gatherer and storer for it
+ */
 
 DGUIFile::DGUIFile()
 {
@@ -29,7 +33,7 @@ DGUIFile::DGUIFile(QString * dirPath, QString * relPath)
         qWarning("Couldn't open file.");
     }else{
         QByteArray fileData = file.readAll();
-        if(true){
+        if(true){ //TODO: Remove debug "true" once binary files are done
             QJsonDocument argDoc(QJsonDocument::fromJson(fileData));
             const QJsonObject &argJson = argDoc.object();
             if(argJson.length() == 0){
@@ -42,6 +46,8 @@ DGUIFile::DGUIFile(QString * dirPath, QString * relPath)
         }
     }
 }
+
+/*Parses a tree of data*/
 QList<DGUILine*>* parseTree(QJsonValue *obj, int blockMode){
     QList<DGUILine*>* list = new QList<DGUILine*>();
     switch(blockMode){

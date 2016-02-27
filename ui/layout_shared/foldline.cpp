@@ -1,7 +1,7 @@
 #include <QString>
 #include <QPixmap>
 #include <QSize>
-
+#include <QVBoxLayout>
 #include "ui/layout_shared/foldline.h"
 #include "ui/layout/qclicklabel.h"
 #include "ui/layout/flowlayout.h"
@@ -76,7 +76,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
     //Bottom
     QLabel * label = new QLabel();
     childrenBox = new QWidget();
-    childrenBoxLayout = new FlowLayout();
+    childrenBoxLayout = new QVBoxLayout();
 
     //Usage
     //Top
@@ -136,23 +136,48 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 }
 
 
-FoldLine::AddChild(FoldLine * child, bool sorted)
+FoldLine::AddChild(FoldLine * addingChild, bool sorted)
 {
-    if(sorted || true){
-        if(childrenBoxLayout->children().size() == 0){
-            childrenBoxLayout->addWidget(child);
+    if(sorted){ //TODO: Remove the "or true" debug
+        if(childrenBoxLayout->count() == 0){
+            childrenBoxLayout->addWidget(addingChild);
         }else{
-            int lastFolderIndex = -1;
-            QString *lastFolder = 0;
-            foreach(QObject *child, childrenBoxLayout->children()){
-                int index = childrenBoxLayout->children().indexOf(child);
+            int lastFileIndex = -1;
+            QString lastFile = 0;
+            bool isFolder = addingChild->icon == 0;
+            foreach(QObject *child, childrenBox->children()){
                 FoldLine *foldChild = (FoldLine*) child;
+                int index = childrenBoxLayout->indexOf(foldChild);
                 bool isChildFolder = foldChild->icon == 0;
+                if(index != -1){
+                    //if its a folder, place it on the bottom of folders
+                    if(isFolder == isChildFolder){
+                        if(strcmp(addingChild->GetText().toLatin1(),foldChild->GetText().toLatin1()) < 0){
+                            childrenBoxLayout->insertWidget(index, addingChild);
+                            return 0;
+                        }
+                        if(lastFile  == 0 || strcmp(foldChild->GetText().toLatin1(), lastFile.toLatin1()) > 0){
+                            lastFile = foldChild->GetText();
+                            lastFileIndex = index;
+                        }
+                    }
+                }
             }
+            if(isFolder || lastFileIndex == -1){ //Place folders on the bottom of the foldersif theres nothing bigger than them. Place files on the botom.
+                childrenBoxLayout->insertWidget(lastFileIndex+1,addingChild);
+            }else{
+                childrenBoxLayout->addWidget(addingChild);
+            }
+
         }
     }else{
-        childrenBoxLayout->addWidget(child);
+        childrenBoxLayout->addWidget(addingChild);
     }
+}
+
+QString FoldLine::GetText()
+{
+    return this->text;
 }
 
 FoldLine::RemoveChild(FoldLine * child)
@@ -168,6 +193,7 @@ FoldLine::SetImage(QString dir)
 
 FoldLine::SetText(QString qstr)
 {
+    this->text = qstr;
     textLabel->setText(qstr);
 }
 

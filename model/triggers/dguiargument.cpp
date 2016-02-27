@@ -4,6 +4,10 @@
 #include "model/triggers/dguiargument.h"
 #include "dguikeydatabase.h"
 
+/*
+ * Just a storage type for an "argument"
+ */
+
 DGUIArgument::DGUIArgument(unsigned char argType, QString * data, unsigned char pseudoArgType)
 {
     this->argType = argType;

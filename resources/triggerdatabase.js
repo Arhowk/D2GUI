@@ -13,7 +13,7 @@
                     "vsbind": "DGTowerKill"
                 },
                 {
-                    "text": "A Hero owned by {Event_Player} was killed by {Event_Player}
+                    "text": "A Hero owned by {Event_Player} was killed by {Event_Player}"
                     "vsbind": "DGHeroKill"
                 }
             ]

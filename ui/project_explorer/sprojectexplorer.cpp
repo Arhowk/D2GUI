@@ -6,15 +6,23 @@
 #include <QGridLayout>
 #include <QJsonArray>
 #include <QMap>
+#include <QScrollArea>
 
 #include "ui/project_explorer/sprojectexplorer.h"
 #include "model/triggers/dguistructurevalue.h"
 #include "ui/layout_shared/foldline.h"
 #include "ui/layout/qclicklabel.h"
 
-SProjectExplorer::SProjectExplorer(QWidget *parent) : QWidget(parent)
+SProjectExplorer::SProjectExplorer(QWidget *parent) : QScrollArea(parent)
 {
+    child = new QWidget();
     flow = new FlowLayout();
+    child->setLayout(flow);
+    this->setWidgetResizable(true);
+    this->setFrameShape(QFrame::NoFrame);
+    signalMapper = new QSignalMapper(parent);
+    connect(signalMapper, SIGNAL(mapped(QString)),
+        this, SLOT(onLoadFile(QString)));
     /*
     lbl = new QLabel();
     lbl->setText("Hello World");
@@ -33,8 +41,7 @@ SProjectExplorer::SProjectExplorer(QWidget *parent) : QWidget(parent)
     f->AddChild(f4);
     flow->addWidget(f);*/
 
-    setLayout(flow);
-
+    this->setWidget(child);
     QTimer * timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(y()));
     timer->start(1000); //time specified in ms
@@ -45,6 +52,11 @@ SProjectExplorer::SProjectExplorer(QWidget *parent) : QWidget(parent)
 
 }
 
+SProjectExplorer::onLoadFile(QString path){
+    qDebug("onloadfile %s" + path.toLatin1());
+    emit changeFile(path);
+}
+
 SProjectExplorer::loadFolder(QString * dir){
     return SProjectExplorer::loadFolder(new DGUIProject(dir));
 }
@@ -53,10 +65,14 @@ SProjectExplorer::loadSubFolder(QString path, FoldLine *line, DGUIStructureValue
     foreach(QString key, obj->children->keys()){
         if(key == "#childrenOfThisParentKappaKappaChameleon"){
             DGUIStructureValue *arr = obj->children->operator []("#childrenOfThisParentKappaKappaChameleon");
-            foreach(QString value, *(arr->superChildList)){
+            foreach(DGUIFile* file, *(arr->superChildList)){
+                QString str = file->getFileName();
+                QString path = file->getFullPath();
                 FoldLine *newLine = new FoldLine();
+                signalMapper->setMapping(newLine, path);
+                connect(newLine, SIGNAL(clicked()), signalMapper, SLOT(map()));
                 newLine->SetImage("page");
-                newLine->SetText(value);\
+                newLine->SetText(str);
                 newLine->SetHasCollapse(false);
                 line->AddChild(newLine);
             }
@@ -80,10 +96,14 @@ SProjectExplorer::loadFolder(DGUIProject * dir){
             //foreach(QString key, )
             DGUIStructureValue *arr = obj->operator []("#childrenOfThisParentKappaKappaChameleon");
             //QList<QString>* arrRaw= arr->superChildList
-            foreach(QString value, *(arr->superChildList)){
+            foreach(DGUIFile* file, *(arr->superChildList)){
+                QString str = file->getFileName();
+                QString path = file->getFullPath();
                 FoldLine *newLine = new FoldLine();
+                signalMapper->setMapping(newLine, path);
+                connect(newLine, SIGNAL(clicked()), signalMapper, SLOT(map()));
                 newLine->SetImage("page");
-                newLine->SetText(value);
+                newLine->SetText(str);
                 newLine->SetHasCollapse(false);
                 masterLine->AddChild(newLine, true);
            }

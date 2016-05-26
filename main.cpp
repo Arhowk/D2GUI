@@ -34,6 +34,6 @@ int main(int argc, char *argv[])
     widget.setLayout(&gg);
     window.showMaximized();
 
-
+    qDebug("/////////////////////////////");
     return a.exec();
 }

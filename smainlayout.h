@@ -6,6 +6,7 @@
 #include <QMainWindow>
 
 #include "ui/project_explorer/sprojectexplorer.h"
+#include "ui/working/striggereditor.h"
 
 class SMainLayout : public QSplitter
 {
@@ -14,12 +15,13 @@ public:
     explicit SMainLayout(QWidget *parent = 0, QMainWindow * qmdr = 0);
 
     SProjectExplorer * projectExplorer;
+    STriggerEditor * editor;
     setupMenu(QMainWindow * qmdr);
 
 signals:
 
 public slots:
-    y();
+    changeWorking(QString);
 };
 
 #endif // SMAINLAYOUT

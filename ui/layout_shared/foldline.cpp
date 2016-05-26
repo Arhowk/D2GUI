@@ -29,12 +29,13 @@ FoldLine::OnCollapseClicked()
 
 FoldLine::OnLabelPressed()
 {
-
+    qDebug("Pressed");
 }
 
 FoldLine::OnLabelClicked()
 {
-
+    qDebug("Clicked");
+    emit clicked();
 }
 
 FoldLine::OnLabelReleased()
@@ -88,7 +89,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 
     connect(collapseOpen, SIGNAL(clicked()), this, SLOT(OnCollapseClicked()));
     connect(collapseClose, SIGNAL(clicked()), this, SLOT(OnCollapseClicked()));
-
+    connect(textLabel, SIGNAL(clicked()), this, SLOT(OnLabelClicked()));
 
 
     //Bottom
@@ -114,7 +115,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 
     //So spanning 9999 columns lags like crazy when you're nesting columns because you're performing a lookup on a potentially 10,000 wide grid.. GG
     gridLayout->addWidget(childrenBox,1,1,1,10); //TODO: Find a better solution than to make the children box span 500 columns...
-    gridLayout->setColumnMinimumWidth(0, 19);
+    gridLayout->setColumnMinimumWidth(0, 5);
     gridLayout->setColumnMinimumWidth(3, 100);
 
     childrenBox->setVisible(true);
@@ -138,7 +139,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 
 FoldLine::AddChild(FoldLine * addingChild, bool sorted)
 {
-    if(sorted){ //TODO: Remove the "or true" debug
+    if(sorted){
         if(childrenBoxLayout->count() == 0){
             childrenBoxLayout->addWidget(addingChild);
         }else{

@@ -20,7 +20,6 @@ SOURCES += main.cpp\
     ui/layout_shared/foldline.cpp \
     ui/notes/snotesarea.cpp \
     ui/project_explorer/sprojectexplorer.cpp \
-    ui/trigger_editor/striggereditor.cpp \
     model/file/dguireader.cpp \
     model/triggers/dguifile.cpp \
     model/triggers/dguiline.cpp \
@@ -28,7 +27,9 @@ SOURCES += main.cpp\
     model/triggers/dguikeydatabase.cpp \
     model/triggers/dguiproject.cpp \
     ui/layout_shared/stoolbar.cpp \
-    model/triggers/dguistructurevalue.cpp
+    model/triggers/dguistructurevalue.cpp \
+    ui/lineselector.cpp \
+    ui/working/striggereditor.cpp
 
 HEADERS  += \
     smainlayout.h \
@@ -38,7 +39,6 @@ HEADERS  += \
     ui/layout_shared/foldline.h \
     ui/notes/snotesarea.h \
     ui/project_explorer/sprojectexplorer.h \
-    ui/trigger_editor/striggereditor.h \
     model/file/dguireader.h \
     model/triggers/dguifile.h \
     model/triggers/dguiline.h \
@@ -46,7 +46,9 @@ HEADERS  += \
     model/triggers/dguikeydatabase.h \
     model/triggers/dguiproject.h \
     ui/layout_shared/stoolbar.h \
-    model/triggers/dguistructurevalue.h
+    model/triggers/dguistructurevalue.h \
+    ui/lineselector.h \
+    ui/working/striggereditor.h
 
 FORMS    += mainwindow.ui
 

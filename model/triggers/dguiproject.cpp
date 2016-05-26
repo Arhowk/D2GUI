@@ -35,22 +35,30 @@ DGUIProject::DGUIProject(QString *dir, QString *name)
 QMap<QString, DGUIStructureValue*>* DGUIProject::getStructureAsTree()
 {
     QMap<QString, DGUIStructureValue*>* fileStructure = new QMap<QString, DGUIStructureValue*>();
+    //We're enuming over every file because we need to seperate them based on subdirectory
     foreach(DGUIFile* f, files){
+        //Remove the directory of the project from the file (obtain the relative name)
+
+
         QString dirNew = f->dir.right(f->dir.size() - this->dir.size() - 1);
         QMap<QString, DGUIStructureValue*> *proc = fileStructure;
         int i = 0;
 
+        //For every directory in the file
         while((i = dirNew.indexOf("/")) != -1){
             QString subDir = dirNew.left(i);
             dirNew = dirNew.right(dirNew.size() - i - 1);
             i = dirNew.indexOf("/");
 
+            //Check if the directory exists. If not, create it.
             if(!proc->contains(subDir)){
                 proc->insert(subDir, new DGUIStructureValue(&dirNew));
             }
             proc = proc->operator [](subDir)->children;
         }
 
+        //Todo: fix this cute little string
+        //The point of it is to contain all of the DIRECT children in their own, nonexisttental directory
         DGUIStructureValue *child;
         if(!proc->contains("#childrenOfThisParentKappaKappaChameleon")){
             child = new DGUIStructureValue("#childrenOfThisParentKappaKappaChameleon");
@@ -59,9 +67,10 @@ QMap<QString, DGUIStructureValue*>* DGUIProject::getStructureAsTree()
             child = proc->operator []("#childrenOfThisParentKappaKappaChameleon");
         }
         if(!child->superChildList){
-            child->superChildList = new QList<QString>();
+            child->superChildList = new QList<DGUIFile*>();
         }
-        child->superChildList->append(dirNew);
+        //Append the name of the file
+        child->superChildList->append(f);
     }
     return fileStructure;
 }

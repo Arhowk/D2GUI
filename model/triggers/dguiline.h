@@ -18,10 +18,14 @@ public:
     DGUILine *prototypeLine;
     QList<DGUILine*>* childrenList;
 
+
+
     appendArgument(DGUIArgument*);
     DGUILine* branch();
     setArgument(unsigned char, DGUIArgument*);
     QByteArray toPrintString();
+
+
 };
 
 #endif // DGUILINE_H

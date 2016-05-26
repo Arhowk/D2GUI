@@ -1,5 +1,6 @@
 #include "ui/layout/qclicklabel.h"
 #include <QPalette>
+
 QClickLabel::QClickLabel(const QString& text, QWidget* parent, bool textHighlighting)
     : QLabel(parent)
 {
@@ -43,6 +44,7 @@ void QClickLabel::mousePressEvent(QMouseEvent* event)
     if(shouldHighlight){
         this->setStyleSheet("QLabel { background-color : rgba(200,220,250,255); }");
     }
+    qDebug("Presed!");
     QLabel::mousePressEvent(event);
     emit clicked();
 }

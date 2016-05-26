@@ -9,7 +9,12 @@ public:
     DGUIFile(QString* ,QString*qt=0);
     static DGUIFile CreateBetaFile();
 
+    QString getFullPath();
+    QString getRelativePath();
+    QString getFileName();
+
     QString dir;
+    QString name;
     QString note;
     QList<DGUILine*> events;
     QList<DGUILine*> conditions;

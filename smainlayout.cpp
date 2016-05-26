@@ -14,12 +14,8 @@
 #include "smainlayout.h"
 #include "ui/layout_shared/foldline.h"
 #include "ui/project_explorer/sprojectexplorer.h"
-#include "ui/trigger_editor/striggereditor.h"
+#include "ui/working/striggereditor.h"
 #include "ui/notes/snotesarea.h"
-
-SMainLayout::y(){
-    //qDebug("Size: %d", projectExplorer->height());
-}
 
 SMainLayout::setupMenu(QMainWindow * wndr)
 {
@@ -34,6 +30,10 @@ SMainLayout::setupMenu(QMainWindow * wndr)
 
 }
 
+SMainLayout::changeWorking(QString path)
+{
+    this->editor->changeFile(path);
+}
 
 SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QSplitter(Qt::Horizontal, parent)
 {
@@ -64,7 +64,8 @@ SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QSplitte
     qvbxl->setMargin(0);
     qgp->setStyleSheet("background-color: white;");
     qgp->setLayout(qvbxl);
-    qvbxl->addWidget(new STriggerEditor());
+    this->editor = new STriggerEditor();
+    qvbxl->addWidget(this->editor);
     commentsAndTriggers->addWidget(qgp);
 
     addWidget(commentsAndTriggers);

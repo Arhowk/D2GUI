@@ -31,7 +31,7 @@ public:
     SetChild(FoldLine * child);
     RemoveChild(FoldLine * child);
     QString GetText();
-    AddChild(FoldLine * child, bool sorted = false);
+    AddChild(FoldLine * child, bool sorted = true);
     SetImage(QString dir);
     SetText(QString str);
     SetHasCollapse(bool hasCollapse);
@@ -41,6 +41,7 @@ public:
     static int hasImagesInit;
 
 signals:
+    clicked();
 
 public slots:
     OnLabelPressed();

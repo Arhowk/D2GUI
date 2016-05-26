@@ -10,6 +10,8 @@ public:
     explicit STriggerEditor(QWidget *parent = 0);
     static STriggerEditor *instance;
     static STriggerEditor* getInstance();
+
+    int changeFile(QString);
 signals:
 
 public slots:

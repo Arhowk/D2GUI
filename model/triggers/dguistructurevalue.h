@@ -3,6 +3,7 @@
 
 #include <QMap>
 #include <QString>
+#include "dguifile.h"
 
 class DGUIStructureValue
 {
@@ -14,7 +15,7 @@ public:
     QMap<QString, DGUIStructureValue*>* children;
     append(DGUIStructureValue*);
     QString child;
-    QList<QString>* superChildList;
+    QList<DGUIFile*>* superChildList;
 };
 
 #endif // DGUISTRUCTUREVALUE_H

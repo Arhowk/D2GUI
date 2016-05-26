@@ -18,6 +18,16 @@ DGUIFile::DGUIFile()
 
 }
 
+QString DGUIFile::getFullPath(){
+    return this->dir;
+}
+QString DGUIFile::getRelativePath(){
+    return this->dir;
+}
+QString DGUIFile::getFileName(){
+    return this->name;
+}
+
 DGUIFile::DGUIFile(QString * dirPath, QString * relPath)
 {
     QString path;
@@ -27,6 +37,8 @@ DGUIFile::DGUIFile(QString * dirPath, QString * relPath)
         path = *dirPath;
     }
     this->dir = path;
+    int position = path.lastIndexOf('/');
+    this->name = dir.right( dir.length() - position - 1);
     QFile file(path);
 
     if (!file.open(QIODevice::ReadOnly)) {

@@ -2,8 +2,9 @@
 #include <QGridLayout>
 
 #include "ui/layout/flowlayout.h"
-#include "ui/trigger_editor/striggereditor.h"
+#include "ui/working/striggereditor.h"
 #import "ui/layout_shared/foldline.h"
+
 STriggerEditor *STriggerEditor::instance = 0;
 
 STriggerEditor* STriggerEditor::getInstance(){
@@ -25,6 +26,14 @@ STriggerEditor::STriggerEditor(QWidget *parent) : QWidget(parent)
     events->SetText(tr("Events"));
     events->SetImage("bell");
 
+    FoldLine * conditions = new FoldLine();
+    conditions->SetText(tr("Conditions"));
+    conditions->SetImage("help");
+
+    FoldLine * actions = new FoldLine();
+    actions->SetText(tr("Actions"));
+    actions->SetImage("lightning");
+    /*
     FoldLine * towerKilled = new FoldLine();
     towerKilled->SetText(tr("DOTA- A tower from team <a href=\"http:\\www.google.com\">(Any Team)</a> was destroyed"));
     towerKilled->SetImage(tr("rainbow"));
@@ -32,24 +41,21 @@ STriggerEditor::STriggerEditor(QWidget *parent) : QWidget(parent)
     towerKilled->textLabel->setOpenExternalLinks(false);
     connect(towerKilled->textLabel, SIGNAL(linkActivated(QString)), this, SLOT(onLinkClicked(QString)));
 
-    FoldLine * conditions = new FoldLine();
-    conditions->SetText(tr("Conditions"));
-    conditions->SetImage("help");
 
     FoldLine * wasDenial = new FoldLine();
     wasDenial->SetText(tr("Entities- Specified killing was a denial"));
     wasDenial->SetImage(tr("rainbow"));
 
-    FoldLine * actions = new FoldLine();
-    actions->SetText(tr("Actions"));
-    actions->SetImage("lightning");
 
     events->AddChild(towerKilled);
     conditions->AddChild(wasDenial);
+    */
 
-    masterFoldLine->AddChild(events);
-    masterFoldLine->AddChild(conditions);
-    masterFoldLine->AddChild(actions);
+
+
+    masterFoldLine->AddChild(events, false);
+    masterFoldLine->AddChild(conditions, false);
+    masterFoldLine->AddChild(actions,false);
 
     f->addWidget(masterFoldLine);
 
@@ -57,7 +63,7 @@ STriggerEditor::STriggerEditor(QWidget *parent) : QWidget(parent)
     setLayout(f);
 }
 
-STriggerEditor::onLinkClicked(QString str)
+STriggerEditor::changeFile(QString str)
 {
     qDebug("Hello");
     qDebug() << str;

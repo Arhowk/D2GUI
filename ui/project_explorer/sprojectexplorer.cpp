@@ -52,16 +52,16 @@ SProjectExplorer::SProjectExplorer(QWidget *parent) : QScrollArea(parent)
 
 }
 
-SProjectExplorer::onLoadFile(QString path){
+void SProjectExplorer::onLoadFile(QString path){
     qDebug("onloadfile %s" + path.toLatin1());
     emit changeFile(path);
 }
 
-SProjectExplorer::loadFolder(QString * dir){
+void SProjectExplorer::loadFolder(QString * dir){
     return SProjectExplorer::loadFolder(new DGUIProject(dir));
 }
 
-SProjectExplorer::loadSubFolder(QString path, FoldLine *line, DGUIStructureValue* obj){
+void SProjectExplorer::loadSubFolder(QString path, FoldLine *line, DGUIStructureValue* obj){
     foreach(QString key, obj->children->keys()){
         if(key == "#childrenOfThisParentKappaKappaChameleon"){
             DGUIStructureValue *arr = obj->children->operator []("#childrenOfThisParentKappaKappaChameleon");
@@ -86,7 +86,7 @@ SProjectExplorer::loadSubFolder(QString path, FoldLine *line, DGUIStructureValue
     }
 }
 
-SProjectExplorer::loadFolder(DGUIProject * dir){
+void SProjectExplorer::loadFolder(DGUIProject * dir){
     QMap<QString, DGUIStructureValue*>* obj = dir->getStructureAsTree();
     FoldLine *masterLine = new FoldLine();
     masterLine->SetText("scripts");
@@ -121,7 +121,7 @@ SProjectExplorer::loadFolder(DGUIProject * dir){
 }
 
 
-SProjectExplorer::y()
+void SProjectExplorer::y()
 {
    // f = f + 1;
     //QFont fb( "Arial", f, QFont::Bold);

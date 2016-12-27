@@ -2,7 +2,7 @@
 #include <QBuffer>
 #include <QFile>
 
-DGUIReader::WriteFile(DGUIFile * file)
+void DGUIReader::WriteFile(DGUIFile * file)
 {
     QBuffer * buf = new QBuffer;
     //Fill the buffer
@@ -19,7 +19,7 @@ DGUIReader::WriteFile(DGUIFile * file)
 
 DGUIFile DGUIReader::OpenFile(QString * path)
 {
-
+    return 0;
 }
 
 DGUIReader::DGUIReader()

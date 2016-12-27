@@ -1,4 +1,5 @@
 #include <QString>
+#include <QJsonObject>
 
 #include "dguiline.h"
 #include "model/triggers/dguiargument.h"
@@ -31,6 +32,11 @@ DGUIArgument::DGUIArgument(unsigned char argType, DGUILine * data, unsigned char
     }else{
         this->pseudoArgType = argType;
     }
+}
+
+void DGUIArgument::setJson(QJsonObject obj)
+{
+    this->obj = obj;
 }
 
 bool DGUIArgument::typeMatch(DGUIArgument *argb){

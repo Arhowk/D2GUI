@@ -1,32 +1,36 @@
 {
     "Events":
     {
-        "KEY": 0,
+        "dat": [
+            {
+                "text": "DOTA",
 
-        "DOTA":
-        {
-            "KEY": 0,
-
-            "dat": [
-                {
-                    "text": "A {DOTA_TowerPos} owned by {DOTA_Team} was {Entity_KillMethod}"
-                    "vsbind": "DGTowerKill"
-                },
-                {
-                    "text": "A Hero owned by {Event_Player} was killed by {Event_Player}"
-                    "vsbind": "DGHeroKill"
-                }
-            ]
-        }
+                "dat": [
+                    {
+                        "text": "A {DOTA_TowerPos} owned by {DOTA_Team} was {Entity_KillMethod}",
+                        "argorder": "1 2 3",
+                        "vsbind": "DGTowerKill",
+                        "key": 0
+                    },
+                    {
+                        "text": "A Hero owned by {Event_Player} was killed by {Event_Player}",
+                        "vsbind": "DGHeroKill",
+                        "key": 1
+                    }
+                ]
+            },{
+                "text": "Map Initialize",
+                "vsbind": "MapInitialize",
+                "key": 2
+            }
+        ]
     },
 
     "Conditions":
     {
-        "KEY": 1
     },
 
     "Actions":
     {
-        "KEY": 2
     }
 }

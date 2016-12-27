@@ -9,7 +9,7 @@ class DGUIReader
 public:
     DGUIReader();
     DGUIFile OpenFile(QString *);
-    WriteFile(DGUIFile *);
+    void WriteFile(DGUIFile *);
 
 };
 

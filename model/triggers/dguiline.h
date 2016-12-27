@@ -1,8 +1,12 @@
 #ifndef DGUILINE_H
 #define DGUILINE_H
 
+#include <vector>
+
 #include <QList>
 #include <QByteArray>
+#include <QJsonObject>
+#include <vector>
 
 #include "dguiargument.h"
 
@@ -20,10 +24,18 @@ public:
 
 
 
-    appendArgument(DGUIArgument*);
+    void appendArgument(DGUIArgument*);
     DGUILine* branch();
-    setArgument(unsigned char, DGUIArgument*);
+    void setArgument(unsigned char, DGUIArgument*);
     QByteArray toPrintString();
+    QString toTriggerString();
+    QString getIcon();
+    void setJsValue(QJsonObject);
+    QJsonObject obj;
+
+    QString triggerString;
+    std::vector<int> argPositions;
+    std::vector<int> argLengths;
 
 
 };

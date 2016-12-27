@@ -11,11 +11,11 @@ public:
     static STriggerEditor *instance;
     static STriggerEditor* getInstance();
 
-    int changeFile(QString);
+    void changeFile(QString);
 signals:
 
 public slots:
-    onLinkClicked(QString);
+    void onLinkClicked(QString);
 };
 
 #endif // STRIGGEREDITOR_H

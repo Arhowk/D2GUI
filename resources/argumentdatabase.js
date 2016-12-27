@@ -2,6 +2,7 @@
     "DOTA_Team": {
         "key": 0,
         "pseudo": "number",
+        "default_text": "Team",
         "dat": {
             "Radiant": 1,
             "Dire": 2,
@@ -12,6 +13,7 @@
     "DOTA_TowerPos": {
         "key": 1,
         "pseudo": "number",
+        "default_text": "Tower Position",
         "dat": {
             "Any": -1,
             "TopAny": 1,
@@ -33,6 +35,18 @@
     "Entity_KillMethod": {
         "key": 2,
         "pseudo": "number",
+        "default_text": "Kill Method",
+        "dat": {
+            "Any": -1,
+            "Denied": 1,
+            "Killed": 2,
+            "Suicided": 3
+        }
+    },
+    "Event_Player": {
+        "key": 2,
+        "pseudo": "number",
+        "default_text": "Kill Method",
         "dat": {
             "Any": -1,
             "Denied": 1,

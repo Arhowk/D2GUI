@@ -12,12 +12,12 @@ SToolbar::SToolbar()
 
 }
 
-SToolbar::newFile()
+void SToolbar::newFile()
 {
     qDebug("New File");
 }
 
-SToolbar::CreateToolbar(QMainWindow *window)
+void SToolbar::CreateToolbar(QMainWindow *window)
 {
     SToolbar *listener = new SToolbar();
 

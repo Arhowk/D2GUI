@@ -28,29 +28,29 @@ public:
 
 
     int childrenVisible = 1;
-    SetChild(FoldLine * child);
-    RemoveChild(FoldLine * child);
+    void SetChild(FoldLine * child);
+    void RemoveChild(FoldLine * child);
     QString GetText();
-    AddChild(FoldLine * child, bool sorted = true);
-    SetImage(QString dir);
-    SetText(QString str);
-    SetHasCollapse(bool hasCollapse);
+    void AddChild(FoldLine * child, bool sorted = true);
+    void SetImage(QString dir);
+    void SetText(QString str);
+    void SetHasCollapse(bool hasCollapse);
 
     static QImage * collapseOpenImage;
     static QImage * collapseCloseImage;
     static int hasImagesInit;
 
 signals:
-    clicked();
+    void clicked();
 
 public slots:
-    OnLabelPressed();
-    OnLabelClicked();
-    OnLabelReleased();
+    void OnLabelPressed();
+    void OnLabelClicked();
+    void OnLabelReleased();
 
-    OnCollapseClicked();
-    OnLineClicked();
-    OnLinkClicked();
+    void OnCollapseClicked();
+    void OnLineClicked();
+    void OnLinkClicked();
 };
 
 

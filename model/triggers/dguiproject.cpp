@@ -61,7 +61,7 @@ QMap<QString, DGUIStructureValue*>* DGUIProject::getStructureAsTree()
         //The point of it is to contain all of the DIRECT children in their own, nonexisttental directory
         DGUIStructureValue *child;
         if(!proc->contains("#childrenOfThisParentKappaKappaChameleon")){
-            child = new DGUIStructureValue("#childrenOfThisParentKappaKappaChameleon");
+            child = new DGUIStructureValue(new QString("#childrenOfThisParentKappaKappaChameleon"));
             proc->insert("#childrenOfThisParentKappaKappaChameleon", child);
         }else{
             child = proc->operator []("#childrenOfThisParentKappaKappaChameleon");

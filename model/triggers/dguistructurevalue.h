@@ -13,7 +13,7 @@ public:
     QString *name;
     bool isFile;
     QMap<QString, DGUIStructureValue*>* children;
-    append(DGUIStructureValue*);
+    void append(DGUIStructureValue*);
     QString child;
     QList<DGUIFile*>* superChildList;
 };

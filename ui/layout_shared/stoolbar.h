@@ -8,14 +8,14 @@ class SToolbar : QWidget
 {
     Q_OBJECT
 public:
-    static CreateToolbar(QMainWindow* window);
+    void static CreateToolbar(QMainWindow* window);
 
 
 private:
     SToolbar();
 
 public slots:
-    newFile();
+    void newFile();
 };
 
 #endif // STOOLBAR_H

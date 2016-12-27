@@ -11,12 +11,12 @@ ScrollArea::ScrollArea(QWidget *parent) : QWidget(parent)
     timer->start(30); //time specified in ms
 }
 
-ScrollArea::beta()
+void ScrollArea::beta()
 {
 
 }
 
-ScrollArea::SetHorizontalScrollVisible(int visible)
+void ScrollArea::SetHorizontalScrollVisible(int visible)
 {
     if(visible)
     {
@@ -27,25 +27,25 @@ ScrollArea::SetHorizontalScrollVisible(int visible)
     }
 }
 
-ScrollArea::SetVerticalScrollVisible(int visible)
+void ScrollArea::SetVerticalScrollVisible(int visible)
 {
 
 }
 
-ScrollArea::ScrollTo(int x, int y)
+void ScrollArea::ScrollTo(int x, int y)
 {
 
 }
 
-ScrollArea::Recalculate()
+void ScrollArea::Recalculate()
 {
 
 }
 
-ScrollArea::TimerExpire()
+void ScrollArea::TimerExpire()
 {
     if(!child){
-        return 0;
+        return;
     }
     int contentX = child->width();
     int contentY = child->height();
@@ -63,7 +63,7 @@ ScrollArea::TimerExpire()
 }
 
 
-ScrollArea::SetChild(QWidget * child)
+void ScrollArea::SetChild(QWidget * child)
 {
     this->child = child;
     //this->Recalculate();

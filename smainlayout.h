@@ -16,12 +16,12 @@ public:
 
     SProjectExplorer * projectExplorer;
     STriggerEditor * editor;
-    setupMenu(QMainWindow * qmdr);
+    void setupMenu(QMainWindow * qmdr);
 
 signals:
 
 public slots:
-    changeWorking(QString);
+    void changeWorking(QString);
 };
 
 #endif // SMAINLAYOUT

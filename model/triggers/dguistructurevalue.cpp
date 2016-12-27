@@ -16,7 +16,7 @@ DGUIStructureValue::DGUIStructureValue(char  name[])
     children = new QMap<QString, DGUIStructureValue*>();
 }
 
-DGUIStructureValue::append(DGUIStructureValue * val){
+void DGUIStructureValue::append(DGUIStructureValue * val){
     if(isFile){
         qWarning("Attempted to append to a non-directory");
     }else{

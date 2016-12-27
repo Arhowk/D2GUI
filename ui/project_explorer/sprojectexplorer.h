@@ -26,14 +26,14 @@ public:
 
     QList<QLine*> files;
 
-    loadFolder(DGUIProject*);
-    loadFolder(QString*);
-    loadSubFolder(QString, FoldLine*, DGUIStructureValue*);
+    void loadFolder(DGUIProject*);
+    void loadFolder(QString*);
+    void loadSubFolder(QString, FoldLine*, DGUIStructureValue*);
 signals:
-    changeFile(QString);
+    void changeFile(QString);
 public slots:
-    y();
-    onLoadFile(QString);
+    void y();
+    void onLoadFile(QString);
 };
 
 #endif // SPROJECTEXPLORER_H

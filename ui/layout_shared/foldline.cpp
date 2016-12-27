@@ -10,7 +10,7 @@ int FoldLine::hasImagesInit = 0;
 QImage * FoldLine::collapseCloseImage = new QImage();
 QImage * FoldLine::collapseOpenImage = new QImage();
 
-FoldLine::OnCollapseClicked()
+void FoldLine::OnCollapseClicked()
 {
     this->setFocus();
     childrenVisible = 1-childrenVisible;
@@ -27,28 +27,28 @@ FoldLine::OnCollapseClicked()
 }
 
 
-FoldLine::OnLabelPressed()
+void FoldLine::OnLabelPressed()
 {
     qDebug("Pressed");
 }
 
-FoldLine::OnLabelClicked()
+void FoldLine::OnLabelClicked()
 {
     qDebug("Clicked");
     emit clicked();
 }
 
-FoldLine::OnLabelReleased()
+void FoldLine::OnLabelReleased()
 {
 
 }
 
-FoldLine::OnLineClicked()
+void FoldLine::OnLineClicked()
 {
 
 }
 
-FoldLine::OnLinkClicked()
+void FoldLine::OnLinkClicked()
 {
 
 }
@@ -115,7 +115,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 
     //So spanning 9999 columns lags like crazy when you're nesting columns because you're performing a lookup on a potentially 10,000 wide grid.. GG
     gridLayout->addWidget(childrenBox,1,1,1,10); //TODO: Find a better solution than to make the children box span 500 columns...
-    gridLayout->setColumnMinimumWidth(0, 5);
+    gridLayout->setColumnMinimumWidth(0, 20);
     gridLayout->setColumnMinimumWidth(3, 100);
 
     childrenBox->setVisible(true);
@@ -137,7 +137,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 }
 
 
-FoldLine::AddChild(FoldLine * addingChild, bool sorted)
+void FoldLine::AddChild(FoldLine * addingChild, bool sorted)
 {
     if(sorted){
         if(childrenBoxLayout->count() == 0){
@@ -155,7 +155,7 @@ FoldLine::AddChild(FoldLine * addingChild, bool sorted)
                     if(isFolder == isChildFolder){
                         if(strcmp(addingChild->GetText().toLatin1(),foldChild->GetText().toLatin1()) < 0){
                             childrenBoxLayout->insertWidget(index, addingChild);
-                            return 0;
+                            return;
                         }
                         if(lastFile  == 0 || strcmp(foldChild->GetText().toLatin1(), lastFile.toLatin1()) > 0){
                             lastFile = foldChild->GetText();
@@ -181,24 +181,24 @@ QString FoldLine::GetText()
     return this->text;
 }
 
-FoldLine::RemoveChild(FoldLine * child)
+void FoldLine::RemoveChild(FoldLine * child)
 {
 
 }
 
-FoldLine::SetImage(QString dir)
+void FoldLine::SetImage(QString dir)
 {
     this->icon = &dir;
     imageIcon->setPixmap(QPixmap(QString(":/images/") + (dir) + QString(".png")));
 }
 
-FoldLine::SetText(QString qstr)
+void FoldLine::SetText(QString qstr)
 {
     this->text = qstr;
     textLabel->setText(qstr);
 }
 
-FoldLine::SetHasCollapse(bool hasCollapse)
+void FoldLine::SetHasCollapse(bool hasCollapse)
 {
     if(hasCollapse){
         this->OnCollapseClicked();

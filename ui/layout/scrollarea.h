@@ -10,12 +10,12 @@ class ScrollArea : public QWidget
 public:
     explicit ScrollArea(QWidget *parent = 0);
 
-    SetChild(QWidget * child);
-    Recalculate();
-    SetHorizontalScrollVisible(int visible);
-    SetVerticalScrollVisible(int visble);
-    ScrollTo(int x, int y);
-    beta();
+    void SetChild(QWidget * child);
+    void Recalculate();
+    void SetHorizontalScrollVisible(int visible);
+    void SetVerticalScrollVisible(int visble);
+    void ScrollTo(int x, int y);
+    void beta();
     int prevChildWidth = -1;
     int prevChildHeight = -1;
 
@@ -35,7 +35,7 @@ public:
 signals:
 
 public slots:
-    TimerExpire();
+    void TimerExpire();
 };
 
 #endif // SCROLLAREA_H

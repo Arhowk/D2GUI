@@ -2,7 +2,7 @@
 #define DGUIARGUMENT_H
 
 #include <QString>
-
+#include <QJsonObject>
 
 class DGUILine;
 
@@ -17,8 +17,10 @@ public:
     QString *dat;
     unsigned char argType;
     unsigned char pseudoArgType;
+    QJsonObject obj;
 
     bool typeMatch(DGUIArgument*);
+    void setJson(QJsonObject);
     QByteArray toPrintString();
 
 };

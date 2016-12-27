@@ -17,7 +17,7 @@
 #include "ui/working/striggereditor.h"
 #include "ui/notes/snotesarea.h"
 
-SMainLayout::setupMenu(QMainWindow * wndr)
+void SMainLayout::setupMenu(QMainWindow * wndr)
 {
     //QMenuBar * menu = this->parent()->parent()->menu
    QMenu *menu = wndr->menuBar()->addMenu(tr("&File"));
@@ -30,7 +30,7 @@ SMainLayout::setupMenu(QMainWindow * wndr)
 
 }
 
-SMainLayout::changeWorking(QString path)
+void SMainLayout::changeWorking(QString path)
 {
     this->editor->changeFile(path);
 }

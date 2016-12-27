@@ -66,7 +66,7 @@ QList<DGUILine*>* parseTree(QJsonValue *obj, int blockMode){
     case 0:{ //event
         QJsonArray arr = obj->toArray();
         foreach(QJsonValue str, arr){
-            DGUILine *prototype = DGUIKeyDatabase::getLine("Events", str.toObject()["Key"].toString(), str.toObject()["SubKey"].toInt());
+            DGUILine *prototype = DGUIKeyDatabase::getLine(0, str.toObject()["Key"].toInt());
             DGUILine *real = prototype->branch();
             char i = 0;
             foreach(QJsonValue strb, str.toObject()["Arguments"].toArray()){

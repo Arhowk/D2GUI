@@ -15,6 +15,7 @@
 #include "ui/layout_shared/foldline.h"
 #include "ui/project_explorer/sprojectexplorer.h"
 #include "ui/working/striggereditor.h"
+#include "ui/working/sitemeditor.h"
 #include "ui/notes/snotesarea.h"
 
 void SMainLayout::setupMenu(QMainWindow * wndr)
@@ -65,7 +66,8 @@ SMainLayout::SMainLayout(QWidget *parent, QMainWindow * parentWindow) : QSplitte
     qgp->setStyleSheet("background-color: white;");
     qgp->setLayout(qvbxl);
     this->editor = new STriggerEditor();
-    qvbxl->addWidget(this->editor);
+    qvbxl->addWidget(new SItemEditor);
+   // qvbxl->addWidget(editor);
     commentsAndTriggers->addWidget(qgp);
 
     addWidget(commentsAndTriggers);

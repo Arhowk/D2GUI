@@ -36,6 +36,6 @@ int main(int argc, char *argv[])
     widget.setLayout(&gg);
     window.showMaximized();
 
-    SArgumentSelector selector(&window, new DGUIArgument(0, new QJsonValue(1), 0));
+    //SArgumentSelector selector(&window, new DGUIArgument(0, new QJsonValue(1), 0));
     return a.exec();
 }

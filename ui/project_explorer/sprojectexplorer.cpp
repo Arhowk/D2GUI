@@ -19,6 +19,7 @@ SProjectExplorer::SProjectExplorer(QWidget *parent) : QScrollArea(parent)
     child = new QWidget();
     flow = new FlowLayout();
     child->setLayout(flow);
+    flow->setMargin(0);
     this->setWidgetResizable(true);
     this->setFrameShape(QFrame::NoFrame);
     signalMapper = new QSignalMapper(parent);

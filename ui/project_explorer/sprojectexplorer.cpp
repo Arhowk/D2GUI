@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QList>
 #include <QGridLayout>
+#include <QDebug>
 #include <QJsonArray>
 #include <QMap>
 #include <QScrollArea>
@@ -91,8 +92,14 @@ void SProjectExplorer::loadFolder(DGUIProject * dir){
     FoldLine *masterLine = new FoldLine();
     masterLine->SetText("scripts");
     QString workingPath = dir->dir;
+    qDebug() << "Load Folder";
+    qDebug() << "//////////////////////";
     foreach(QString key, obj->keys()){
+        //Checking if the key is the actual children of the master liene
+
         if(key == "#childrenOfThisParentKappaKappaChameleon"){
+            qDebug() << "Actual Children Folder";
+            qDebug() << "//////////////////////";
             //foreach(QString key, )
             DGUIStructureValue *arr = obj->operator []("#childrenOfThisParentKappaKappaChameleon");
             //QList<QString>* arrRaw= arr->superChildList
@@ -107,16 +114,21 @@ void SProjectExplorer::loadFolder(DGUIProject * dir){
                 newLine->SetHasCollapse(false);
                 masterLine->AddChild(newLine, true);
            }
+           qDebug() << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\";
 
         }else{
+            qDebug() << "Folder " << key;
+            qDebug() << "//////////////////////";
             FoldLine *newLine = new FoldLine();
             newLine->SetText(key);
 
             DGUIStructureValue* obj22 = obj->operator [](key);
             this->loadSubFolder(workingPath, newLine,  obj22);
             masterLine->AddChild(newLine, true);
+            qDebug() << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\";
         }
     }
+    qDebug() << "///////////////////";
     flow->addWidget(masterLine);
 }
 

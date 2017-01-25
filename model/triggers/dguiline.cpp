@@ -1,5 +1,7 @@
 #include <QList>
 #include <QDebug>
+#include <vector>
+#include <QJsonValue>
 
 #include "dguiargument.h"
 #include "model/triggers/dguiline.h"
@@ -16,11 +18,19 @@
  *
  */
 
-DGUILine::DGUILine(unsigned char prototypeKey, bool isPrototype, QList<DGUIArgument*> *list, QList<DGUIArgument*> *prototypeList)
+DGUILine::DGUILine(unsigned char prototypeKey, bool isPrototype, std::vector<DGUIArgument*> *list, QList<DGUIArgument*> *prototypeList)
 {
     this->isPrototype = isPrototype;
     this->prototypeKey = prototypeKey;
     this->argList = list;
+    if(!list || list->size() < prototypeList->size())
+    {
+        this->argList = new std::vector<DGUIArgument*>();
+        foreach(DGUIArgument* arg, *prototypeList)
+        {
+             this->argList->push_back(arg->branch(new QJsonValue()));
+        }
+    }
     this->prototypeList = prototypeList;
 }
 /* Note- We made this its own function because i don't want to go back and fix everything */
@@ -29,7 +39,12 @@ void DGUILine::setJsValue(QJsonObject obj)
     this->obj = obj;
 
     //Finally we have the js obj- lets make the trigger string
+    calculatePrintString();
+}
 
+void DGUILine::calculatePrintString()
+{
+    qDebug() << "Calculate PRint String";
     //First drag out the string
     this->triggerString = obj["text"].toString();
 
@@ -41,8 +56,6 @@ void DGUILine::setJsValue(QJsonObject obj)
     Qt::CaseSensitivity cs = Qt::CaseInsensitive;
     rx.setCaseSensitivity(cs);
     int currentArg = 0;
-    qDebug() << "Set JS Value";
-
     if(!rx.isValid()){
         qWarning("Invalid regex");
     }else{
@@ -53,12 +66,14 @@ void DGUILine::setJsValue(QJsonObject obj)
             QString proc = rx.cap(1);
             int len = proc.length();
             //We have the cap and the pos- replace it with the arg value or the protoarg's default value
-            qDebug() << "Proc:" << proc;
-            qDebug() << "Proc:" << prototypeList;
-            qDebug() << "Proc:" << prototypeList->at(currentArg);
-            qDebug() << "Proc:" << prototypeList->at(currentArg)->obj;
-            qDebug() << "Proc:" << proc;
-            QString replace = "<a href='Hello' style='color: red;'>(" + prototypeList->at(currentArg)->obj["default_text"].toString() + ")</a>";
+            QString replace = "<a href='Hello' ";
+            if(!argList->at(currentArg)->dat->isNull())
+            {
+                replace = replace + ">(" + argList->at(currentArg)->toPrintString();
+            }else{
+                replace = replace + "style='color: red;'>(" + prototypeList->at(currentArg)->obj["default_text"].toString();
+            }
+            replace = replace + + ")</a>";
 
             int invertedPos = this->triggerString.length() - pos;
             this->triggerString = this->triggerString.left(pos) + replace + this->triggerString.right(invertedPos - proc.length() - 2);
@@ -66,6 +81,8 @@ void DGUILine::setJsValue(QJsonObject obj)
         }
     }
     this->triggerString = "DOTA - " + this->triggerString;
+
+    emit recalculatePrintString();
 }
 
 DGUILine* DGUILine::branch()
@@ -75,7 +92,7 @@ DGUILine* DGUILine::branch()
     }else{
         qDebug("Branching off of a good dguiline");
     }
-    DGUILine *newLine = new DGUILine(this->prototypeKey, false, new QList<DGUIArgument*>(), prototypeList);
+    DGUILine *newLine = new DGUILine(this->prototypeKey, false, new std::vector<DGUIArgument*>(), prototypeList);
     newLine->obj = obj;
     newLine->triggerString = triggerString;
     return newLine;
@@ -94,6 +111,14 @@ void DGUILine::setArgument(unsigned char index, DGUIArgument *arg)
     }else{
         qWarning("Attempted to set an argument for a DGUILine beyond its argument count");
     }
+}
+
+void DGUILine::setArgument(unsigned char index, QJsonValue *arg)
+{
+    //this->argList->append();
+    this->argList->insert(this->argList->begin() + index, this->prototypeList->at(index)->branch(arg));
+    qDebug() << "Set Arg";
+    calculatePrintString();
 }
 
 QString DGUILine::toTriggerString()

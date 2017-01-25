@@ -3,25 +3,28 @@
 
 #include <QString>
 #include <QJsonObject>
+#include <QJsonValue>
 
 class DGUILine;
 
 class DGUIArgument
 {
 public:
-    DGUIArgument(unsigned char, QString*, unsigned char = 0);
+    DGUIArgument(unsigned char, QJsonValue*, unsigned char = 0);
     DGUIArgument(unsigned char, DGUILine*, unsigned char = 0);
     bool isPrototype;
     bool isLine;
     DGUILine *lineReference;
-    QString *dat;
+    QJsonValue *dat;
     unsigned char argType;
     unsigned char pseudoArgType;
     QJsonObject obj;
 
     bool typeMatch(DGUIArgument*);
     void setJson(QJsonObject);
-    QByteArray toPrintString();
+    QString toPrintString();
+
+    DGUIArgument* branch(QJsonValue*);
 
 };
 

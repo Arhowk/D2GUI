@@ -15,8 +15,8 @@
         "pseudo": "number",
         "default_text": "Tower Position",
         "dat": {
-            "Any": -1,
-            "TopAny": 1,
+            "Any Tower": -1,
+            "Any Top Tower": 1,
             "TopOuter": 2,
             "TopInner": 3,
             "TopBase": 4,

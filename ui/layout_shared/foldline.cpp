@@ -2,6 +2,7 @@
 #include <QPixmap>
 #include <QSize>
 #include <QVBoxLayout>
+#include <QDebug>
 #include "ui/layout_shared/foldline.h"
 #include "ui/layout/qclicklabel.h"
 #include "ui/layout/flowlayout.h"
@@ -50,7 +51,6 @@ void FoldLine::OnLineClicked()
 
 void FoldLine::OnLinkClicked()
 {
-
 }
 
 FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
@@ -61,6 +61,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
         collapseOpenImage->load("arrow-opened.png");
     }
     //Object Initialization
+    this->icon = new QString("");
 
     //All
     QGridLayout * gridLayout = new QGridLayout(this);
@@ -115,7 +116,7 @@ FoldLine::FoldLine(QWidget *parent) : QFrame(parent)
 
     //So spanning 9999 columns lags like crazy when you're nesting columns because you're performing a lookup on a potentially 10,000 wide grid.. GG
     gridLayout->addWidget(childrenBox,1,1,1,10); //TODO: Find a better solution than to make the children box span 500 columns...
-    gridLayout->setColumnMinimumWidth(0, 20);
+    gridLayout->setColumnMinimumWidth(0, 10);
     gridLayout->setColumnMinimumWidth(3, 100);
 
     childrenBox->setVisible(true);
@@ -145,15 +146,19 @@ void FoldLine::AddChild(FoldLine * addingChild, bool sorted)
         }else{
             int lastFileIndex = -1;
             QString lastFile = 0;
-            bool isFolder = addingChild->icon == 0;
+            bool isFolder = (addingChild->icon->toLatin1() == "");
+            qDebug() << addingChild->text << " IS folder " << isFolder << " " << addingChild->icon;
             foreach(QObject *child, childrenBox->children()){
                 FoldLine *foldChild = (FoldLine*) child;
                 int index = childrenBoxLayout->indexOf(foldChild);
                 bool isChildFolder = foldChild->icon == 0;
+                qDebug() << " Enum IS folder " << isChildFolder;
                 if(index != -1){
                     //if its a folder, place it on the bottom of folders
+                    //or if its a line
                     if(isFolder == isChildFolder){
                         if(strcmp(addingChild->GetText().toLatin1(),foldChild->GetText().toLatin1()) < 0){
+                            qDebug() << " Placing " << (isFolder ? "folder" : "file") << " at " << index;
                             childrenBoxLayout->insertWidget(index, addingChild);
                             return;
                         }
@@ -165,8 +170,10 @@ void FoldLine::AddChild(FoldLine * addingChild, bool sorted)
                 }
             }
             if(isFolder || lastFileIndex == -1){ //Place folders on the bottom of the foldersif theres nothing bigger than them. Place files on the botom.
+                qDebug() << " Placing " << (isFolder ? "folder" : "file") << " at " << (lastFileIndex+1);
                 childrenBoxLayout->insertWidget(lastFileIndex+1,addingChild);
             }else{
+                qDebug() << " Placing " << (isFolder ? "folder" : "file") << " at " << ("the back");
                 childrenBoxLayout->addWidget(addingChild);
             }
 

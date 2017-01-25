@@ -29,7 +29,13 @@ SOURCES += main.cpp\
     ui/layout_shared/stoolbar.cpp \
     model/triggers/dguistructurevalue.cpp \
     ui/lineselector.cpp \
-    ui/working/striggereditor.cpp
+    ui/working/striggereditor.cpp \
+    ui/dialogs/argument_selector/sargumentselector.cpp \
+    ui/working/sobjecteditor.cpp \
+    ui/working/sitemeditor.cpp \
+    model/objects/dgobject.cpp \
+    model/objects/dgobjectitem.cpp \
+    model/objects/dgobjectdataset.cpp
 
 HEADERS  += \
     smainlayout.h \
@@ -48,7 +54,13 @@ HEADERS  += \
     ui/layout_shared/stoolbar.h \
     model/triggers/dguistructurevalue.h \
     ui/lineselector.h \
-    ui/working/striggereditor.h
+    ui/working/striggereditor.h \
+    ui/dialogs/argument_selector/sargumentselector.h \
+    ui/working/sobjecteditor.h \
+    ui/working/sitemeditor.h \
+    model/objects/dgobject.h \
+    model/objects/dgobjectitem.h \
+    model/objects/dgobjectdataset.h
 
 FORMS    += mainwindow.ui
 

@@ -71,7 +71,7 @@ QList<DGUILine*>* parseTree(QJsonValue *obj, int blockMode){
             char i = 0;
             foreach(QJsonValue strb, str.toObject()["Arguments"].toArray()){
                 QString strbc = strb.toString();
-                real->setArgument(i++, new DGUIArgument((unsigned char)-1, &strbc));
+                real->setArgument(i++, new DGUIArgument((unsigned char)-1, &strb));
             }
             list->append(real);
         }
@@ -100,9 +100,9 @@ DGUIFile DGUIFile::CreateBetaFile()
 
     DGUILine* protoEvt1 = DGUIKeyDatabase::getKeyWithIndex(0,0);
     event1 = protoEvt1->branch();
-    event1->setArgument(0, new DGUIArgument(1, new QString("-1")));
-    event1->setArgument(1, new DGUIArgument(0, new QString("-1")));
-    event1->setArgument(2, new DGUIArgument(2, new QString("1")));
+    event1->setArgument(0, new DGUIArgument(1, new QJsonValue("-1")));
+    event1->setArgument(1, new DGUIArgument(0, new QJsonValue("-1")));
+    event1->setArgument(2, new DGUIArgument(2, new QJsonValue("1")));
     qDebug("Beta done");
     return DGUIFile();
     //qDebug(event1->toPrintString());

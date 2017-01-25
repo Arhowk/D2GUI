@@ -13,6 +13,8 @@
 #include "model/triggers/dguifile.h"
 #include "model/triggers/dguikeydatabase.h"
 
+#include "ui/dialogs/argument_selector/sargumentselector.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -34,6 +36,6 @@ int main(int argc, char *argv[])
     widget.setLayout(&gg);
     window.showMaximized();
 
-    qDebug("/////////////////////////////");
+    SArgumentSelector selector(&window, new DGUIArgument(0, new QJsonValue(1), 0));
     return a.exec();
 }

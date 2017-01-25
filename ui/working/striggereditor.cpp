@@ -8,6 +8,8 @@
 #include "model/triggers/dguiline.h"
 #include "model/triggers/dguikeydatabase.h"
 
+#include "ui/dialogs/argument_selector/sargumentselector.h"
+
 STriggerEditor *STriggerEditor::instance = 0;
 
 STriggerEditor* STriggerEditor::getInstance(){
@@ -62,11 +64,12 @@ STriggerEditor::STriggerEditor(QWidget *parent) : QWidget(parent)
 
     f->addWidget(masterFoldLine);
     DGUILine* firstEvent = DGUIKeyDatabase::getLine(0, 0);
+    firstEvent->setArgument(0, new QJsonValue(1) );
 
     FoldLine * evt1 = new FoldLine();
     evt1->SetText(firstEvent->toTriggerString());
-
     evt1->SetImage(firstEvent->getIcon());
+    evt1->SetHasCollapse(false);
 
     events->AddChild(evt1,false);
 

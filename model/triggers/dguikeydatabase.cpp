@@ -98,7 +98,7 @@ DGUILine* DGUIKeyDatabase::getKeyWithIndex(unsigned char type, unsigned char ind
         }
 
 
-        DGUILine * line = new DGUILine(index, true, new QList<DGUIArgument*>(), protoList);
+        DGUILine * line = new DGUILine(index, true, 0, protoList);
 
 
         return line;
@@ -154,7 +154,7 @@ DGUIArgument* DGUIKeyDatabase::getArgumentWithName(QString name)
     foreach(QString key, argumentDatabase.keys()){
         if(key == name){
             QJsonObject obj = argumentDatabase[key].toObject();
-            DGUIArgument *arg = new DGUIArgument(obj["key"].toInt(),new QString(""), 1);
+            DGUIArgument *arg = new DGUIArgument(obj["key"].toInt(),new QJsonValue(""), 1);
             arg->setJson(obj);
 
             return arg;
@@ -208,7 +208,7 @@ void DGUIKeyDatabase::init_flatten_recurse(int index, QJsonValue current)
 
            }
            /* Create the DGUILine proto-arg list*/
-           DGUILine *newLine = new DGUILine(index, true, new QList<DGUIArgument*>(), protoList);
+           DGUILine *newLine = new DGUILine(index, true, 0, protoList);
            newLine->setJsValue(obj);
 
            flattenedKeyDatabase[index].insert(flattenedKeyDatabase[index].begin() + obj["key"].toInt(), newLine);
